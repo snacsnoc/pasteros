@@ -1,0 +1,6 @@
+/google-code-prettify/
+/.git-rewrite/
+/libraries/
+nbproject/*
+
+/public/

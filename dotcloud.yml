@@ -1,0 +1,4 @@
+www:
+  type: php
+sql:
+  type: postgresql

@@ -1,0 +1,48 @@
+<div id="footer-container">
+    <footer class="wrapper">
+        <h3>Quisque fermentum auctor lacus in aliquet. Cras rutrum pulvinar placerat. Mauris eget erat metus.</h3>
+    </footer>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/public/js/script.js"></script>
+<script type="text/javascript" src="/public/js/main.js"></script>
+<script type="text/javascript" src="/public/js/prettify.js"></script>
+<script type="text/javascript" src="/public/js/syntaxhighlighter/shCore.js"></script>
+<script  type="text/javascript" src="/public/js/syntaxhighlighter/shAutoloader.js"></script>
+<script type="text/javascript">
+function path()
+{
+  var args = arguments,
+      result = []
+      ;
+       
+  for(var i = 0; i < args.length; i++)
+      result.push(args[i].replace('@', '/public/js/syntaxhighlighter/'));
+       
+  return result
+};
+ 
+SyntaxHighlighter.autoloader.apply(null, path(
+  'bash                   @shBrushBash.js',
+  'cpp                    @shBrushCpp.js',
+  'c#                     @shBrushCSharp.js',
+  'css                    @shBrushCss.js',
+  'diff                   @shBrushDiff.js',
+  'java                   @shBrushJava.js',
+  'javascript             @shBrushJScript.js',
+  'perl                   @shBrushPerl.js',
+  'php                    @shBrushPhp.js',
+  'plain                  @shBrushPlain.js',
+  'python                 @shBrushPython.js',
+  'ruby                   @shBrushRuby.js',
+  'sql                    @shBrushSql.js',
+  'xml                    @shBrushXml.js'
+));
+ 
+SyntaxHighlighter.all();
+</script>
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>

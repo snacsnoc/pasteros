@@ -1,0 +1,23 @@
+{% include 'head.twig' %}
+<body onload="prettyPrint()">
+    <div id="header-container">
+        <header class="wrapper clearfix">
+            <h1 id="title">pasteros</h1>
+            {% include 'nav.twig' %}
+        </header>
+    </div>
+    <div id="main-container">
+        <div id="main" class="wrapper clearfix">
+            <article>
+                <header>
+                    <h2>{{ fork_paste.name }} diff</h2>
+                    diff of paste <b>{{ fork_paste.id }}</b> and <b>{{ parent_paste.id }}</b>
+                </header>
+                <section>
+                    <a href="#" onclick="javascript:togglev();">Line # <img src="/public/images/page_tag_red.gif" alt="toggle" title="Show/Hide line numbers"></a> 
+                    <pre class="prettyprint linenums"><code>{{ textdiff|raw }}</code></pre>
+                </section>
+            </article>
+        </div>
+    </div>
+    {% include 'footer.twig' %}
