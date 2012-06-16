@@ -10,10 +10,9 @@ class Add_Controller {
             return header('Location: /');
         }
 
-        //Sanitize for database insert
 
-        $content = htmlentities($_POST['content']);
-        $content = stripslashes($_POST['content']);
+        $content = $_POST['content'];
+
 
         //If the paste has no name, set a default name
         if (!isset($_POST['name']) || empty($_POST['name'])) {
@@ -21,13 +20,10 @@ class Add_Controller {
         } else {
             $name = $_POST['name'];
         }
-        //Sanitize paste name
-        $name = htmlentities($name);
-        $name = stripslashes($name);
-        
+
         //Syntax highlighting
         $language = $_POST['language'];
-        
+
         //If the checkbox is checked, then the paste is not visible in the recent box
         if ($_POST['visible'] == true) {
             $visible = false;

@@ -19,9 +19,8 @@ class View_Controller {
                 return false;
             }
 
-            //Decode the database output
-            $name = html_entity_decode($paste_content['name']);
-            $content = html_entity_decode($paste_content['content']);
+            $name = $paste_content['name'];
+            $content = $paste_content['content'];
 
             //Assign the page title
             $this->title = $name;
@@ -83,7 +82,7 @@ class View_Controller {
         $get_paste = R::dispense('paste');
         $paste_content = $get_paste->getPaste($paste_id);
 
-        $content = stripcslashes(urldecode($paste_content['content']));
+        $content = $paste_content['content'];
 
         //Allow the user to view the raw content
         header('Content-type: text/plain');
@@ -98,9 +97,9 @@ class View_Controller {
         $get_paste = R::dispense('paste');
         $paste_content = $get_paste->getPaste($paste_id);
 
-        //Decode the output
-        $name = html_entity_decode($paste_content['name']);
-        $content = html_entity_decode($paste_content['content']);
+
+        $name = $paste_content['name'];
+        $content = $paste_content['content'];
 
         //Create a 'temporary' file and force the user to download
         file_put_contents("temp/$name.txt", $content);
@@ -130,8 +129,6 @@ class View_Controller {
         $opcodes = FineDiff::getDiffOpcodes($parent_paste['content'], $fork_paste['content'] /* , default granularity is set to character */);
         //Render the opcode to an HTML diff
         $textdiff = FineDiff::renderDiffToHTMLFromOpcodes($parent_paste['content'], $opcodes);
-
-        $textdiff = html_entity_decode($textdiff);
 
         //Pass the values to Twig and render the template
         return $this->twig->render('diff.twig', array('title' => $this->title,
