@@ -41,11 +41,13 @@ class Add_Controller {
 
 
         $paste_insert = R::dispense('content');
+        
         $paste_insert->name = $name;
         $paste_insert->content = $content;
         $paste_insert->visible = $visible;
         $paste_insert->parent = $parent_paste;
         $paste_insert->language = $language;
+        
         $insert_id = R::store($paste_insert);
         R::close();
         //If an ID is present, redirect to the paste's page

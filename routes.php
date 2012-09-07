@@ -109,6 +109,13 @@ respond('POST', '/changetheme', function ($request) {
         });
 
 
+        
+respond('GET', '/api', function ($request) {
+            $api = new Api_Controller();
+            $get_index = $api->get_index();
+            return $get_index;
+        });        
+        
 
 
 //If nothing matches, respond as a 404 error.

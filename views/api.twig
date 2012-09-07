@@ -1,0 +1,31 @@
+{% include 'head.twig' %}
+<body>
+    <div id="header-container">
+        <header class="wrapper clearfix">
+            <h1 id="title">pasteros</h1>
+            {% include 'nav.twig' %}
+        </header>
+    </div>
+    <div id="main-container">
+        <div id="main" class="wrapper clearfix">
+            <article>
+                <header>
+                    <h1>paste here</h1>
+                    {% if error is not null %}
+                    <b>{{ error }}</b>
+                    {% endif %}
+                </header>
+                <section>
+                    <p>
+                        API
+                    </p>
+                </section>
+            </article>
+            <aside>
+                <p>
+                    things
+                </p>
+            </aside>
+        </div>
+    </div>
+    {% include 'footer.twig' %}

@@ -1,12 +1,12 @@
 <?php
 
-class Home_Controller {
+class Home_Controller extends Base_Controller {
 
     function __construct() {
-
-        $this->twig_loader = new Twig_Loader_Filesystem('views');
-        $this->twig = new Twig_Environment($this->twig_loader);
+        //Include Twig
+        parent::getTwig();
     }
+
 
     public function get_index() {
         try {

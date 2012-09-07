@@ -1,12 +1,12 @@
 <?php
 
-class View_Controller {
+class View_Controller extends Base_Controller {
 
     function __construct() {
-        //I have no idea what I'm doing
-        $this->twig_loader = new Twig_Loader_Filesystem('views');
-        $this->twig = new Twig_Environment($this->twig_loader);
+        //Include Twig
+        parent::getTwig();
     }
+
 
     public function get_index($paste_id) {
         try {
