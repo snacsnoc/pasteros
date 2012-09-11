@@ -1,48 +1,59 @@
-<div id="footer-container">
-    <footer class="wrapper">
-        <h3>Quisque fermentum auctor lacus in aliquet. Cras rutrum pulvinar placerat. Mauris eget erat metus.</h3>
-    </footer>
-</div>
+<footer>
+    <section id="footer-area">
+        <section id="footer-outer-block">
+            <aside class="footer-segment">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">one link</a></li>
+                    <li><a href="#">two link</a></li>
+                    <li><a href="#">red link</a></li>
+                    <li><a href="#">blue link</a></li>
+                </ul>
+            </aside><!-- end of #second footer segment -->
+        </section><!-- end of footer-outer-block -->
+    </section><!-- end of footer-area -->
+</footer> <!-- end of life -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="/public/js/script.js"></script>
-<script type="text/javascript" src="/public/js/main.js"></script>
-<script type="text/javascript" src="/public/js/prettify.js"></script>
-<script type="text/javascript" src="/public/js/syntaxhighlighter/shCore.js"></script>
-<script  type="text/javascript" src="/public/js/syntaxhighlighter/shAutoloader.js"></script>
+<script src="/js/script.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/prettify.js"></script>
+<script type="text/javascript" src="/js/syntaxhighlighter/shCore.js"></script>
+<script  type="text/javascript" src="/js/syntaxhighlighter/shAutoloader.js"></script>
 <script type="text/javascript">
-function path()
-{
-  var args = arguments,
-      result = []
-      ;
+    function path()
+    {
+        var args = arguments,
+        result = []
+        ;
        
-  for(var i = 0; i < args.length; i++)
-      result.push(args[i].replace('@', '/public/js/syntaxhighlighter/'));
+        for(var i = 0; i < args.length; i++)
+            result.push(args[i].replace('@', '/js/syntaxhighlighter/'));
        
-  return result
-};
+        return result
+    };
  
-SyntaxHighlighter.autoloader.apply(null, path(
-  'bash                   @shBrushBash.js',
-  'cpp                    @shBrushCpp.js',
-  'c#                     @shBrushCSharp.js',
-  'css                    @shBrushCss.js',
-  'diff                   @shBrushDiff.js',
-  'java                   @shBrushJava.js',
-  'javascript             @shBrushJScript.js',
-  'perl                   @shBrushPerl.js',
-  'php                    @shBrushPhp.js',
-  'plain                  @shBrushPlain.js',
-  'python                 @shBrushPython.js',
-  'ruby                   @shBrushRuby.js',
-  'sql                    @shBrushSql.js',
-  'xml                    @shBrushXml.js'
+    SyntaxHighlighter.autoloader.apply(null, path(
+    'bash                   @shBrushBash.js',
+    'cpp                    @shBrushCpp.js',
+    'c#                     @shBrushCSharp.js',
+    'css                    @shBrushCss.js',
+    'diff                   @shBrushDiff.js',
+    'java                   @shBrushJava.js',
+    'javascript             @shBrushJScript.js',
+    'perl                   @shBrushPerl.js',
+    'php                    @shBrushPhp.js',
+    'plain                  @shBrushPlain.js',
+    'python                 @shBrushPython.js',
+    'ruby                   @shBrushRuby.js',
+    'sql                    @shBrushSql.js',
+    'xml                    @shBrushXml.js'
 ));
  
-SyntaxHighlighter.all();
+    SyntaxHighlighter.all();
 </script>
 <script type="text/javascript">
-     SyntaxHighlighter.all()
+    SyntaxHighlighter.all()
 </script>
 </body>
 </html>
+<!-- Free template created by http://freehtml5templates.com -->

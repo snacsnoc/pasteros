@@ -5,7 +5,7 @@ function classLoader($class_name) {
     $class_directories = array("models", "controllers");
     $classString = '';
     foreach ($class_directories as $value) {
-        $classString = $_SERVER['DOCUMENT_ROOT'] . '/' . $value . '/' . $class_name . '.php';
+        $classString = APP_PATH. '/' . $value . '/' . $class_name . '.php';
         if (file_exists($classString)) {
             require_once $classString;
         }
@@ -22,7 +22,7 @@ function libraryLoader() {
 
     $library_path = '';
     foreach ($libraries as $value) {
-        $library_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
+        $library_path = APP_PATH . '/' . $value;
         if (file_exists($library_path)) {
             require_once $library_path;
         }

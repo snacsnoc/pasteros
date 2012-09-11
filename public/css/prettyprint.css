@@ -1,0 +1,56 @@
+/* 
+    Document   : prettyprint
+    Created on : 12-May-2012, 6:21:16 AM
+    Author     : easto
+    Description:
+        Used when viewing a paste
+*/
+
+.prettyprint, textarea
+            {
+                border: solid 1px;
+                width:160%;
+                margin:0;
+
+            }
+
+            /* code prettify styles */
+            .prettyprint
+            {
+                overflow:auto;
+
+                white-space:pre-wrap;
+                background-color:#D9D9D9;
+                font-size: 12px;
+                font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+            }
+
+            .prettyprint ol
+            {
+                /*  color:#4777; */
+                padding:2em 3em 2em 5em;
+            }
+            input { 
+                font-family: "Monaco", "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+            }
+
+            textarea { 
+                border-bottom: 1px solid #DDDDDD;
+                border-left: 1px solid #CCCCCC;
+                border-right: 1px solid #DDDDDD;
+                border-top: 1px solid #CCCCCC;
+                font-family: "Monaco", "Courier", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+                font-size: 12px;
+                height: 300px;
+                margin: 10px;
+                width: 97.5%;
+            }
+            .prettyprint code
+            {
+                font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !important;
+            }
+
+            .prettyprint ol li
+            {
+                padding:0;
+            }

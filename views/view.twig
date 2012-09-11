@@ -1,55 +1,51 @@
 {% include 'head.twig' %}
 <body onload="prettyPrint()">
-    <div id="header-container">
-        <header class="wrapper clearfix">
-            <h1 id="title">pasteros</h1>
-            {% include 'nav.twig' %}
-        </header>
-    </div>
-    <div id="main-container">
-        <div id="main" class="wrapper clearfix">
-            <paste>
-                <header>
-                    <h2>{{ name|escape }}</h2>
-                    {% if parent_paste is not null %} <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ id }}/diff/{{ parent_paste }}">diff</a></h5> {% endif %}
-                </header>
-                <section>
-                    Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ id }}/download">Download <img src="/public/images/icon_package_get.gif" title="download paste" alt="download"></a> | <a href="{{ id }}/raw">Raw <img src="/public/images/page.gif" alt="raw" title="see raw paste"></a> 
-                    |  <img src="/public/images/file_font.gif" alt="change theme" title="change highlighting theme - current theme: {{ csstheme }}" onclick="javascript:$('.theme').toggle();">
-                    <div class="theme" style="display: none;">
-                        <form action="/changetheme" method="post">
-                            <input type="hidden" name="id" value="{{ id }}">
-                            <select name="csstheme" onclick="this.form.submit();">
-                                <option value="RDark">RDark</option>
-                                <option value="Midnight">Midnight</option>
-                                <option value="MDUltra">MDUltra</option>
-                                <option value="FadeToGrey">FadeToGrey</option>
-                                <option value="Emacs">Emacs</option>
-                                <option value="Eclipse">Eclipse</option>
-                                <option value="Django">Django</option>
-                                <option value="Default">Default</option>
-                            </select>
-                        </form>
-                    </div>
-                    <pre class="brush: {{ language }} toolbar: false;">{{ content|escape }}</pre>
-                </section>
-                <br>
-                <header>
-                    Create a new version of this paste
-                </header>
-                <section>
-                    <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
-                        <textarea name="content" rows="10%" cols="100%">{{ content|escape }}</textarea>
-                        <input type="hidden" name="parent_paste" value="{{ id }}">
-                        <input type="hidden" name="name" value="{{ name }}">
-                        <input type="hidden" name="language" value="{{ language }}">
-                        {% if is_visible == false %}
-                        <input type="hidden" name="visible" value="false">
-                        {% endif %}
-                        <input type="submit" value="fork this paste" title="just fork it!">
+    <div id="wrapper"><!-- #wrapper -->
+        {% include 'nav.twig' %}
+        {% include 'topheader.twig' %}
+        <section id="main">
+            <section id="content">
+                <p>
+                <h2>{{ name|escape }}</h2>
+                {% if parent_paste is not null %} 
+                <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ id }}/diff/{{ parent_paste }}">diff</a></h5> 
+                {% endif %}
+                Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ id }}/download">Download <img src="/images/icon_package_get.gif" title="download paste" alt="download"></a> | <a href="{{ id }}/raw">Raw <img src="/images/page.gif" alt="raw" title="see raw paste"></a> 
+                |  <img src="/images/file_font.gif" alt="change theme" title="change highlighting theme - current theme: {{ csstheme }}" onclick="javascript:$('.theme').toggle();">
+                <div class="theme" style="display: none;">
+                    <form action="/changetheme" method="post">
+                        <input type="hidden" name="id" value="{{ id }}">
+                        <select name="csstheme" onclick="this.form.submit();">
+                            <option value="RDark">RDark</option>
+                            <option value="Midnight">Midnight</option>
+                            <option value="MDUltra">MDUltra</option>
+                            <option value="FadeToGrey">FadeToGrey</option>
+                            <option value="Emacs">Emacs</option>
+                            <option value="Eclipse">Eclipse</option>
+                            <option value="Django">Django</option>
+                            <option value="Default">Default</option>
+                        </select>
                     </form>
-                </section>
-            </paste>
-        </div>
-    </div>
-    {% include 'footer.twig' %}
+                </div>
+                </p>
+                <pre class="brush: {{ language }} toolbar: false;">{{ content|escape }}</pre>
+            </section>
+            <br>
+            <section id="content">
+                <h3> Create a new version </h3>
+                <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
+                    <textarea name="content" rows="10%" cols="100%">{{ content|escape }}</textarea>
+                    <input type="hidden" name="parent_paste" value="{{ id }}">
+                    <input type="hidden" name="name" value="{{ name }}">
+                    <input type="hidden" name="language" value="{{ language }}">
+                    {% if is_visible == false %}
+                    <input type="hidden" name="visible" value="false">
+                    {% endif %}
+                    <input type="submit" value="fork this paste" title="just fork it!">
+                </form>
+            </section>
+        </section>
+        {% include 'footer.twig' %}
+    </div><!-- #wrapper -->
+</body>
+</html>

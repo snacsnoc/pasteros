@@ -1,23 +1,14 @@
 {% include 'head.twig' %}
 <body>
-    <div id="header-container">
-        <header class="wrapper clearfix">
-            <h1 id="title">pasteros</h1>
-            {% include 'nav.twig' %}
-        </header>
-    </div>
-    <div id="main-container">
-        <div id="main" class="wrapper clearfix">
-            <article>
-                <header>
-                    <h1>paste here</h1>
-                    {% if error is not null %}
-                    <b>{{ error }}</b>
-                    {% endif %}
-                </header>
-                <section>
+    <div id="wrapper"><!-- #wrapper -->
+        {% include 'nav.twig' %}
+        {% include 'topheader.twig' %}
+        <section id="main"><!-- #main content and sidebar area -->
+           
+            <section id="homecontent"><!-- #content -->
+                <article>
                     <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">name <input type="text" name="name" value="" size="30" maxlength="60"> (optional)<br >
-                        <textarea name="content" rows="20%" cols="100%"></textarea>
+                        <textarea name="content" rows="40" cols="400"></textarea>
                         <br>
                         <select name="language">
                             <option value="bash">bash</option>
@@ -36,17 +27,27 @@
                             <option value="xml">xml</option>
                         </select>
                         <br>
-                        <input type="checkbox" name="visible" value="FALSE"><img src="public/images/icon_padlock.gif"  title="check for private paste" ><br>
-                        <input type="submit" value="Submit" title="lets go!">
+                        <input type="checkbox" name="visible" value="FALSE"><img src="/images/icon_padlock.gif"  title="check for private paste" ><br>
+                        <input type="submit" value="Submit" title="lets go!" class="button">
                     </form>
-                </section>
-            </article>
-            <aside>
-                <h2>Recent</h2>
-                {% for item in array%}
-                {# {{ item.id }}: #} <a href="/{{ item.id }}">{{ item.name }}</a> <br>
-                {% endfor %}
-            </aside>
-        </div>
-    </div>
-    {% include 'footer.twig' %}
+                </article>
+            </section><!-- end of #content -->
+		<aside id="sidebar"><!-- sidebar -->
+
+		                <h3>Recent</h3>
+                <ul>
+                    {% for item in array%}
+                    <li>  {# {{ item.id }}: #} <a href="/{{ item.id }}">{{ item.name }}</a> </li>
+                    {% endfor %}
+                </ul>
+
+		</aside>
+
+        </section><!-- end of #main content and sidebar-->
+        {% include 'footer.twig' %}
+
+
+    </div><!-- #wrapper -->
+    <!-- Free template created by http://freehtml5templates.com -->
+</body>
+</html>
