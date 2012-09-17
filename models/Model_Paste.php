@@ -6,7 +6,7 @@ class Model_Paste extends RedBean_SimpleModel {
      * @return awesome Awesome output 
      */
     public function octodad() {
-        echo 'meow';
+        return 'meow';
     }
 
     /**
@@ -14,7 +14,7 @@ class Model_Paste extends RedBean_SimpleModel {
      * @param int $recent_limit Set the limit to the amount of pastes retrieved
      * @return array Most recent pastes
      */
-    public function getRecentPastes($paste_limit) {
+    public static function getRecentPastes($paste_limit) {
 
         $sidebar_result = R::getAll("SELECT * FROM content WHERE visible = TRUE ORDER BY id DESC LIMIT $paste_limit OFFSET 0");
         return $sidebar_result;
@@ -25,7 +25,7 @@ class Model_Paste extends RedBean_SimpleModel {
      * @param int $paste_id Individual paste ID
      * @return array Paste's contents
      */
-    public function getPaste($paste_id) {
+    public static function getPaste($paste_id) {
 
         //Select the paste based on the ID given
         $paste_content = R::getAll("SELECT * 
@@ -46,7 +46,7 @@ class Model_Paste extends RedBean_SimpleModel {
      * @param int $parent_id Parent paste ID
      * @return array Array of both paste's contents
      */
-    public function getDiffPaste($paste_id, $parent_id) {
+    public static function getDiffPaste($paste_id, $parent_id) {
 
         //Get the forked paste
         $fork_paste = R::getAll("SELECT content.content, content.name, content.id
