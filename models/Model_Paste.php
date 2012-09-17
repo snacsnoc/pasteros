@@ -33,7 +33,7 @@ class Model_Paste extends RedBean_SimpleModel {
         WHERE content.id = '$paste_id' LIMIT 1");
 
         //If the lookup failed, return false
-        if ($paste_content == NULL) {
+        if (null == $paste_content) {
             return false;
         } else {
             return $paste_content[0];
@@ -59,10 +59,35 @@ class Model_Paste extends RedBean_SimpleModel {
         WHERE content.id = '$parent_id'");
 
         //If there are no results in either query, return false
-        if ($fork_paste == NULL || $parent_paste == NULL) {
+        if (null == $fork_paste || null == $parent_paste) {
             return false;
         } else {
             return array($fork_paste[0], $parent_paste[0]);
+        }
+    }
+
+    /**
+     * Insert paste into database
+     * @param array $content Input
+     * @param string $database_name Database name
+     * @return mixed Returns the insert ID or false if an error occured
+     */
+    public static function insertPaste($content = array(), $database_name) {
+
+        $paste_insert = R::dispense($database_name);
+        $paste_insert->name = $content['name'];
+        $paste_insert->content = $content['content'];
+        $paste_insert->visible = $content['visible'];
+        $paste_insert->parent = $content['parent_paste'];
+        $paste_insert->language = $content['language'];
+
+        $insert_id = R::store($paste_insert);
+        R::close();
+
+        if (true == $insert_id) {
+            return $insert_id;
+        } else {
+            return false;
         }
     }
 
