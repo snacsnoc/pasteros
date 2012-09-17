@@ -7,7 +7,6 @@ class View_Controller extends Base_Controller {
         parent::getTwig();
     }
 
-
     public function get_index($paste_id) {
         try {
 
@@ -66,9 +65,19 @@ class View_Controller extends Base_Controller {
 
 
             //Pass the values to Twig and render the template
-            return $this->twig->render('view.twig', array('title' => $this->title, 'name' => $name,
-                        'content' => $content, 'id' => $id, 'time' => $paste_time, 'is_visible' => $is_visible, 'parent_paste' => $parent_paste,
-                        'diff' => $diff, 'language' => $language, 'error' => $_SESSION['error'], 'csstheme' => $_SESSION['csstheme']));
+            return $this->twig->render('view.twig', 
+                    array('title' => $this->title,
+                        'name' => $name,
+                        'content' => $content,
+                        'id' => $id,
+                        'time' => $paste_time,
+                        'is_visible' => $is_visible,
+                        'parent_paste' => $parent_paste,
+                        'diff' => $diff,
+                        'language' => $language,
+                        'error' => $_SESSION['error'],
+                        'csstheme' => $_SESSION['csstheme']));
+
             //Once the error has been passed to Twig, change it to null so it only appears once
             $_SESSION['error'] = null;
         } catch (Exception $e) {
