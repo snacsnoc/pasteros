@@ -19,7 +19,7 @@ class Home_Controller extends Base_Controller {
             //We map it like so to correctly pass it to Twig
             $sidebar_array[] = $sidebar_result;
 
-            echo $this->twig->render('index.twig', array(
+            return $this->twig->render('index.twig', array(
                 'title' => $this->title, 'array' => $sidebar_array[0],
                 'error' => $_SESSION['error']));
             $_SESSION['error'] = null;
