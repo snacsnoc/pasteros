@@ -4,7 +4,7 @@
         {% include 'nav.twig' %}
         {% include 'topheader.twig' %}
         <section id="main"><!-- #main content and sidebar area -->
-           
+
             <section id="homecontent"><!-- #content -->
                 <article>
                     <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">name <input type="text" name="name" value="" size="30" maxlength="60"> (optional)<br >
@@ -32,22 +32,21 @@
                     </form>
                 </article>
             </section><!-- end of #content -->
-		<aside id="sidebar"><!-- sidebar -->
+            <aside id="sidebar"><!-- sidebar -->
 
-		                <h3>Recent</h3>
+                <h3>Recent</h3>
                 <ul>
                     {% for item in array%}
                     <li>  {# {{ item.id }}: #} <a href="/{{ item.id }}">{{ item.name }}</a> </li>
                     {% endfor %}
                 </ul>
 
-		</aside>
+            </aside>
 
         </section><!-- end of #main content and sidebar-->
         {% include 'footer.twig' %}
 
 
     </div><!-- #wrapper -->
-    <!-- Free template created by http://freehtml5templates.com -->
 </body>
 </html>
