@@ -15,9 +15,9 @@ class Diff_Controller extends Base_Controller {
     public function get_index() {
         $this->title = 'online diff';
 
-        echo $this->twig->render('creatediff.twig', array(
-            'title' => $this->title, 
-            'error' => $_SESSION['error']));
+        return $this->twig->render('creatediff.twig', array(
+                    'title' => $this->title,
+                    'error' => $_SESSION['error']));
         $_SESSION['error'] = null;
     }
 
