@@ -5,7 +5,7 @@
 respond('GET', '/', function ($request) {
             $home = new Home_Controller();
             $get_index = $home->get_index();
-            return $get_index;
+            echo $get_index;
         });
 
 
@@ -13,7 +13,7 @@ respond('GET', '/', function ($request) {
 respond('POST', '/add', function ($request) {
             $add = new Add_Controller();
             $post_index = $add->post_index();
-            return $post_index;
+            echo $post_index;
         });
 
 //Viewing a paste
@@ -113,10 +113,23 @@ respond('POST', '/changetheme', function ($request) {
 respond('GET', '/api', function ($request) {
             $api = new Api_Controller();
             $get_index = $api->get_index();
-            return $get_index;
+            echo $get_index;
+        });     
+        
+respond('POST', '/api/create', function ($request) {
+            $api = new Api_Controller();
+            $post_create = $api->post_create();
+            echo $post_create;
         });        
         
+        
 
+respond('GET', '/diff', function ($request) {
+            $diff = new Diff_Controller();
+            $get_index = $diff->get_index();
+            echo $get_index;
+        });                
+        
 
 //If nothing matches, respond as a 404 error.
 respond('404', function ($request) {
