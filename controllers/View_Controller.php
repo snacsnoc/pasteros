@@ -14,7 +14,7 @@ class View_Controller extends Base_Controller {
             $paste_content = $get_paste->getPaste($paste_id);
 
             //If no result is returned, return false 
-            if ($paste_content == false) {
+            if (false === $paste_content) {
                 return false;
             }
 
@@ -27,6 +27,7 @@ class View_Controller extends Base_Controller {
             $paste_time = $paste_content['time'];
             $id = $paste_content['id'];
             $language = $paste_content['language'];
+            
             //If forking a post
             if (isset($paste_content['parent'])) {
                 $parent_paste = $paste_content['parent'];
@@ -39,13 +40,12 @@ class View_Controller extends Base_Controller {
                 $is_visible = false;
             }
             //Set the default text theme
-            if (empty($_SESSION['csstheme'])) {
-                $_SESSION['csstheme'] = 'Default';
+            if (empty($_COOKIE['csstheme'])) {
+                setcookie('csstheme', 'Default',  time()+60*60*24*30);
             }
 
             //Calculate the difference from the current time to the time the paste was uploaded
-            $current_time = time();
-            $time_difference = $current_time - strtotime($paste_time);
+            $time_difference = time() - strtotime($paste_time);
 
 
             $diff = array('time' => $time_difference,
@@ -65,8 +65,7 @@ class View_Controller extends Base_Controller {
 
 
             //Pass the values to Twig and render the template
-            return $this->twig->render('view.twig', 
-                    array('title' => $this->title,
+            return $this->twig->render('view.twig', array('title' => $this->title,
                         'name' => $name,
                         'content' => $content,
                         'id' => $id,
@@ -76,7 +75,7 @@ class View_Controller extends Base_Controller {
                         'diff' => $diff,
                         'language' => $language,
                         'error' => $_SESSION['error'],
-                        'csstheme' => $_SESSION['csstheme']));
+                        'csstheme' => $_COOKIE['csstheme']));
 
             //Once the error has been passed to Twig, change it to null so it only appears once
             $_SESSION['error'] = null;
@@ -107,17 +106,17 @@ class View_Controller extends Base_Controller {
         $paste_content = $get_paste->getPaste($paste_id);
 
 
-        $name = $paste_content['name'];
+        $name = tempnam('temp/', $paste_content['name']);
         $content = $paste_content['content'];
-
+        
         //Create a 'temporary' file and force the user to download
-        file_put_contents("temp/$name.txt", $content);
+        file_put_contents("$name.txt", $content);
         header("Cache-Control: public");
         header("Content-Description: File Transfer");
-        header("Content-Disposition: attachment; filename=temp/$name.txt");
+        header("Content-Disposition: attachment; filename=$name.txt");
         header("Content-Type: text/plain");
         header("Content-Transfer-Encoding: binary");
-        readfile("temp/$name.txt");
+        readfile("$name.txt");
     }
 
     public function get_diff($paste_id, $parent_id) {
