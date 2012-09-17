@@ -38,18 +38,15 @@ class Add_Controller {
             $parent_paste = intval($_POST['parent_paste']);
         }
 
+        //Insert paste into the database and get the row ID
+        $insert_id = Model_Paste::insertPaste(array('name' => $name,
+                    'content' => $content,
+                    'visible' => $visible,
+                    'parent_paste' => $parent_paste,
+                    'language' => $language), 'content');
 
 
-        $paste_insert = R::dispense('content');
-        
-        $paste_insert->name = $name;
-        $paste_insert->content = $content;
-        $paste_insert->visible = $visible;
-        $paste_insert->parent = $parent_paste;
-        $paste_insert->language = $language;
-        
-        $insert_id = R::store($paste_insert);
-        R::close();
+
         //If an ID is present, redirect to the paste's page
         if ($insert_id) {
             return header('Location: /' . $insert_id);
