@@ -1,8 +1,10 @@
 <?php
 
+$klein = new \Klein\Klein();
+
 //This is where all the routes are mapped
 //The home page of the website
-respond('GET', '/', function ($request) {
+$klein->respond('GET', '/', function () {
             $home = new Home_Controller();
             $get_index = $home->get_index();
             echo $get_index;
@@ -10,34 +12,34 @@ respond('GET', '/', function ($request) {
 
 
 //The route for adding a paste
-respond('POST', '/add', function ($request) {
+$klein->respond('POST', '/add', function () {
             $add = new Add_Controller();
             $post_index = $add->post_index();
             echo $post_index;
         });
 
 //Viewing a paste
-respond('GET', '/[i:id]', function ($request) {
-            if ($request->validate('id')->isInt()) {
+$klein->respond('GET', '/[i:id]', function ($request, $response, $service) {
+            if ($service->validateParam('id')->isInt()) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_index = $paste_view->get_index($paste_id);
-                if ($get_index == false) {
+
+                if ($get_index !== null) {
+                    echo $get_index;
+                } else {
                     $_SESSION['error'] = 'invalid paste number!';
                     return header('Location: /');
-                } else {
-                    echo $get_index;
                 }
             } else {
-                $_SESSION['error'] = 'invalid paste number!';
+                $_SESSION['error'] = serialize('invalid paste number!');
                 return header('Location: /');
             }
         });
 
 //Viewing a paste in a raw format
-respond('GET', '/[i:id]/raw', function ($request) {
-
-            if ($request->validate('id')->isInt()) {
+$klein->respond('GET', '/[i:id]/raw', function ($request, $response, $service) {
+            if ($service->validateParam('id')->isInt()) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_raw = $paste_view->get_raw($paste_id);
@@ -55,9 +57,9 @@ respond('GET', '/[i:id]/raw', function ($request) {
         });
 
 //Diff a forked and parent paste
-respond('GET', '/[i:id]/diff/[i:parent]', function ($request) {
+$klein->respond('GET', '/[i:id]/diff/[i:parent]', function ($request, $response, $service) {
             //Validate that the parent ID and forked ID are integers
-            if ($request->validate('id')->isInt() && $request->validate('parent')->isInt()) {
+            if ($service->validateParam('id')->isInt() && $service->validateParam('parent')->isInt()) {
 
                 $paste_id = $request->id;
                 $parent_id = $request->parent;
@@ -81,9 +83,9 @@ respond('GET', '/[i:id]/diff/[i:parent]', function ($request) {
 
 
 //Force the user to download the paste
-respond('GET', '/[i:id]/download', function ($request) {
+$klein->respond('GET', '/[i:id]/download', function ($request, $response, $service) {
 
-            if ($request->validate('id')->isInt()) {
+            if ($service->validateParam('id')->isInt()) {
                 $paste_id = $request->id;
 
                 $paste_view = new View_Controller();
@@ -102,38 +104,38 @@ respond('GET', '/[i:id]/download', function ($request) {
 );
 
 //Change the text highlighting colour
-respond('POST', '/changetheme', function ($request) {
+$klein->respond('POST', '/changetheme', function ($request) {
             //Set cookie for 30 days
-            setcookie('csstheme', $_POST['csstheme'],  time()+60*60*24*30);
+            setcookie('csstheme', $_POST['csstheme'], time() + 60 * 60 * 24 * 30);
             $paste_id = intval($_POST['id']);
             return header("Location: /$paste_id");
         });
 
 
-        
-respond('GET', '/api', function ($request) {
+
+$klein->respond('GET', '/api', function () {
             $api = new Api_Controller();
             $get_index = $api->get_index();
             echo $get_index;
-        });     
-        
-respond('POST', '/api/create', function ($request) {
+        });
+
+$klein->respond('POST', '/api/create', function () {
             $api = new Api_Controller();
             $post_create = $api->post_create();
             echo $post_create;
-        });        
-        
-        
+        });
 
-respond('GET', '/diff', function ($request) {
+
+
+$klein->respond('GET', '/diff', function () {
             $diff = new Diff_Controller();
             $get_index = $diff->get_index();
             echo $get_index;
-        });                
-        
+        });
+
 
 //If nothing matches, respond as a 404 error.
-respond('404', function ($request) {
+$klein->respond('404', function () {
             $page = $request->uri();
             echo "Blerg. It looks like $page doesn't exist.<br> Go <a href='/'>home</a>.";
         });

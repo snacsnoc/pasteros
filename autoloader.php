@@ -15,8 +15,6 @@ function classLoader($class_name) {
 //Autoload the required libraries
 function libraryLoader() {
     $libraries = array(
-        'klein/klein.php',
-        'libraries/Twig/Autoloader.php',
         'libraries/rb.php',
         'libraries/finediff.php');
 
