@@ -25,7 +25,7 @@ class Add_Controller {
         $language = $_POST['language'];
 
         //If the checkbox is checked, then the paste is not visible in the recent box
-        if ($_POST['visible'] == true) {
+        if ("false" == $_POST['visible']) {
             $visible = false;
         } else {
             $visible = true;

@@ -36,9 +36,12 @@ class View_Controller extends Base_Controller {
             }
 
             //Send this to Twig to allow forked posts the same visibility
-            if (isset($paste_content['visible'])) {
+            if(true == $paste_content['visible']) {
+                $is_visible = true;
+            }else{
                 $is_visible = false;
             }
+
             //Set the default text theme
             if (empty($_COOKIE['csstheme'])) {
                 setcookie('csstheme', 'Default',  time()+60*60*24*30);

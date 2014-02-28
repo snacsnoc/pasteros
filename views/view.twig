@@ -40,6 +40,8 @@
                     <input type="hidden" name="language" value="{{ language }}">
                     {% if is_visible == false %}
                     <input type="hidden" name="visible" value="false">
+                    {% else %}
+                    <input type="hidden" name="visible" value="true">
                     {% endif %}
                     <input type="submit" value="fork this paste" title="just fork it!">
                 </form>
