@@ -119,13 +119,17 @@ $klein->respond('GET', '/api', function () {
             echo $get_index;
         });
 
-$klein->respond('POST', '/api/create', function () {
+$klein->respond('POST', '/api/v1/create', function () {
             $api = new Api_Controller();
             $post_create = $api->post_create();
             echo $post_create;
         });
 
-
+$klein->respond('POST', '/api/v1/simplecreate', function () {
+            $api = new Api_Controller();
+            $post_simplecreate = $api->post_simplecreate();
+            echo $post_simplecreate;
+        });
 
 $klein->respond('GET', '/diff', function () {
             $diff = new Diff_Controller();

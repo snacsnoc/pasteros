@@ -61,6 +61,7 @@ class Api_Controller extends Base_Controller {
                             'parent_paste' => null,
                             'language' => $data['language']), 'content');
 
+
                 //Create a response
                 if ($insert_id) {
                     $response = array('id' => $insert_id);
@@ -78,6 +79,46 @@ class Api_Controller extends Base_Controller {
             return json_last_error();
         }
     }
+
+    public function post_simplecreate() {
+        try {
+
+            $data['content'] = file_get_contents('php://input');
+
+
+            //Set default values
+            $data['name'] = 'pasteros paste';
+            $data['language'] = 'plain';
+            $data['visible'] = false;
+
+
+            //Check if there's content
+            if (false !== $data['content']) {
+
+                //Insert paste into the database and get the row ID
+                $insert_id = Model_Paste::insertPaste(array('name' => $data['name'],
+                            'content' => $data['content'],
+                            'visible' => $data['visible'],
+                            'parent_paste' => null,
+                            'language' => $data['language']), 'content');
+
+
+                //Create a response
+                if ($insert_id) {
+                    $response = $insert_id;
+                } else {
+                    $response = 'No ID returned, something went wrong';
+                }
+
+            }
+
+
+            return $response;
+
+        } catch (Exception $e) {
+            die('Something went horribly wrong!');
+        }
+    }    
 
 }
 
