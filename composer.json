@@ -1,6 +1,8 @@
 {
     "require": {
         "klein/klein": "v2.0.2",
-        "twig/twig": "1.*"        
+        "twig/twig": "1.*",
+        "aferrandini/phpqrcode": "1.0.1"        
+       
     }
 }
