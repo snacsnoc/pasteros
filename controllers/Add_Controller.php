@@ -27,8 +27,6 @@ class Add_Controller {
         //If the checkbox is checked, then the paste is not visible in the recent box
         if ("false" == $_POST['visible']) {
             $visible = false;
-        } else {
-            $visible = true;
         }
 
         //If the post has no parent (not forked), assign the value null
