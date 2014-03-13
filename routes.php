@@ -24,11 +24,10 @@ $klein->respond('GET', '/[i:id]', function ($request, $response, $service) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_index = $paste_view->get_index($paste_id);
-
-                if ($get_index !== null) {
+                if (false !== $get_index) {
                     echo $get_index;
                 } else {
-                    $_SESSION['error'] = 'invalid paste number!';
+                    $_SESSION['error'] = serialize('invalid paste number!');
                     return header('Location: /');
                 }
             } else {
@@ -44,14 +43,14 @@ $klein->respond('GET', '/[i:id]/raw', function ($request, $response, $service) {
                 $paste_view = new View_Controller();
                 $get_raw = $paste_view->get_raw($paste_id);
 
-                if ($get_raw == false) {
-                    $_SESSION['error'] = 'invalid paste number!';
-                    return header('Location: /');
-                } else {
+                if (false !== $get_raw ) {
                     echo $get_raw;
+                } else {
+                    $_SESSION['error'] = serialize('invalid paste number!');
+                    return header('Location: /');
                 }
             } else {
-                $_SESSION['error'] = 'invalid paste number!';
+                $_SESSION['error'] = serialize('invalid paste number!');
                 return header('Location: /');
             }
         });
@@ -68,14 +67,14 @@ $klein->respond('GET', '/[i:id]/diff/[i:parent]', function ($request, $response,
                 $get_diff = $paste_view->get_diff($paste_id, $parent_id);
 
                 //TODO: there must be an easier way to do this
-                if ($get_diff == false) {
-                    $_SESSION['error'] = 'invalid paste number!';
-                    return header('Location: /');
-                } else {
+                if (false !== $get_diff) {
                     echo $get_diff;
+                } else {
+                    $_SESSION['error'] = serialize('invalid paste number!');
+                    return header('Location: /');
                 }
             } else {
-                $_SESSION['error'] = 'invalid paste number!';
+                $_SESSION['error'] = serialize('invalid paste number!');
                 return header('Location: /');
             }
         });
@@ -90,14 +89,14 @@ $klein->respond('GET', '/[i:id]/download', function ($request, $response, $servi
 
                 $paste_view = new View_Controller();
                 $get_download = $paste_view->get_download($paste_id);
-                if ($get_download === false) {
-                    $_SESSION['error'] = 'invalid paste number!';
-                    return header('Location: /');
-                } else {
+                if (false !== $get_download) {
                     echo $get_download;
+                } else {
+                    $_SESSION['error'] = serialize('invalid paste number!');
+                    return header('Location: /');                    
                 }
             } else {
-                $_SESSION['error'] = 'invalid paste number!';
+                $_SESSION['error'] = serialize('invalid paste number!');
                 return header('Location: /');
             }
         }
@@ -140,6 +139,5 @@ $klein->respond('GET', '/diff', function () {
 
 //If nothing matches, respond as a 404 error.
 $klein->respond('404', function () {
-            $page = $request->uri();
-            echo "Blerg. It looks like $page doesn't exist.<br> Go <a href='/'>home</a>.";
+            echo "Blerg. It looks like the page your are accessing doesn't exist.<br> Go <a href='/'>home</a>.";
         });

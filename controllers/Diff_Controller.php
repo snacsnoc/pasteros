@@ -17,7 +17,7 @@ class Diff_Controller extends Base_Controller {
 
         return $this->twig->render('creatediff.twig', array(
                     'title' => $this->title,
-                    'error' => $_SESSION['error']));
+                    'error' => unserialize($_SESSION['error'])));
         $_SESSION['error'] = null;
     }
 

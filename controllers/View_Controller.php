@@ -77,7 +77,7 @@ class View_Controller extends Base_Controller {
                         'parent_paste' => $parent_paste,
                         'diff' => $diff,
                         'language' => $language,
-                        'error' => $_SESSION['error'],
+                        'error' => unserialize($_SESSION['error']),
                         'csstheme' => $_COOKIE['csstheme']));
 
             //Once the error has been passed to Twig, change it to null so it only appears once
@@ -144,7 +144,7 @@ class View_Controller extends Base_Controller {
         //Pass the values to Twig and render the template
         return $this->twig->render('diff.twig', array('title' => $this->title,
                     'fork_paste' => $fork_paste, 'parent_paste' => $parent_paste,
-                    'textdiff' => $textdiff, 'error' => $_SESSION['error']));
+                    'textdiff' => $textdiff, 'error' => unserialize($_SESSION['error'])));
         $_SESSION['error'] = null;
     }
 
