@@ -4,35 +4,36 @@
         {% include 'nav.twig' %}
         <div class="jdumbotron">
             <p>
-                <h2>{{ name|escape }}</h2>
-                {% if parent_paste is not null %} 
-                <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ id }}/diff/{{ parent_paste }}">diff</a></h5> 
-                {% endif %}
-                <p>
+            <h2>{{ name|escape }}</h2>
+            {% if parent_paste is not null %} 
+            <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ id }}/diff/{{ parent_paste }}">diff</a></h5>
+            {% endif %}
+            <p>
                 Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ id }}/download">Download <img src="/images/icon_package_get.gif" title="download paste" alt="download"></a> | <a href="{{ id }}/raw">Raw <img src="/images/page.gif" alt="raw" title="see raw paste"></a> 
                 | <a id="toggle">QR Code</a>
                 <img id="qrcode" src="/images/qrcode/{{ id }}.png" style="display:none;">  
-                </p>       
             </p>
-                <pre class="brush: {{ language }}">{{ content|escape }}</pre>
+            </p>
+            <pre class="brush: {{ language }}">{{ content|escape }}</pre>
             <br>
             <p>
-                <h3> Create a new version </h3>
-                <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
-                    <textarea name="content" rows="10%" cols="100%">{{ content|escape }}</textarea>
-                    <input type="hidden" name="parent_paste" value="{{ id }}">
-                    <input type="hidden" name="name" value="{{ name }}">
-                    <input type="hidden" name="language" value="{{ language }}">
-                    {% if is_visible == false %}
-                    <input type="hidden" name="visible" value="false">
-                    {% else %}
-                    <input type="hidden" name="visible" value="true">
-                    {% endif %}
-                    <input type="submit" value="fork this paste" title="just fork it!" class="btn-sm btn-info">
-                </form>
+            <h3> Create a new version </h3>
+            <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
+                <textarea name="content" rows="10%" cols="100%">{{ content|escape }}</textarea>
+                <input type="hidden" name="parent_paste" value="{{ id }}">
+                <input type="hidden" name="name" value="{{ name }}">
+                <input type="hidden" name="language" value="{{ language }}">
+                {% if is_visible == false %}
+                <input type="hidden" name="visible" value="false">
+                {% else %}
+                <input type="hidden" name="visible" value="true">
+                {% endif %}
+                <input type="submit" value="fork this paste" title="just fork it!" class="btn-sm btn-info">
+            </form>
             </p>
         </div>
         {% include 'footer.twig' %}
-    </div><!-- #wrapper -->
+    </div>
+    <!-- #wrapper -->
 </body>
 </html>

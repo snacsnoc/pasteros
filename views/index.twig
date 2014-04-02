@@ -2,53 +2,47 @@
 <body>
     <div class="container">
         {% include 'nav.twig' %}
-        
         <div class="jumbotron">
             <h2>paste things</h2>
+            <p>
+            <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
+                <p class="text-info">name <input type="text" name="name" value="" maxlength="60"> (optional)</p>
+                </p>
+                <textarea name="content" rows="40" cols="400"></textarea>
+                <br>
+                <select name="language" class="select input-sm">
+                    <option value="bash">bash</option>
+                    <option value="cpp">c++</option>
+                    <option value="c#">c#</option>
+                    <option value="css">css</option>
+                    <option value="diff">diff</option>
+                    <option value="java">java</option>
+                    <option value="javascript">javascript</option>
+                    <option value="perl">perl</option>
+                    <option value="php">php</option>
+                    <option value="plain" selected="selected">plain</option>
+                    <option value="python">python</option>
+                    <option value="ruby">ruby</option>
+                    <option value="sql">sql</option>
+                    <option value="xml">xml</option>
+                </select>
+                <br>
                 <p>
-                    <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
-                    
-                    <p class="text-info">name <input type="text" name="name" value="" maxlength="60"> (optional)</p>
+                    <input type="checkbox" name="visible" value="false"><img src="/images/icon_padlock.gif"  title="check for private paste" >
+                    <br>
+                    <input type="submit" value="Submit" title="lets go!" class="btn btn-lg btn-success">
                 </p>
-
-                        <textarea name="content" rows="40" cols="400"></textarea>
-                        <br>
-                        <select name="language" class="select input-sm">
-                            <option value="bash">bash</option>
-                            <option value="cpp">c++</option>
-                            <option value="c#">c#</option>
-                            <option value="css">css</option>
-                            <option value="diff">diff</option>
-                            <option value="java">java</option>
-                            <option value="javascript">javascript</option>
-                            <option value="perl">perl</option>
-                            <option value="php">php</option>
-                            <option value="plain" selected="selected">plain</option>
-                            <option value="python">python</option>
-                            <option value="ruby">ruby</option>
-                            <option value="sql">sql</option>
-                            <option value="xml">xml</option>
-                        </select>
-
-                        <br>
-                        <p>
-                        <input type="checkbox" name="visible" value="false"><img src="/images/icon_padlock.gif"  title="check for private paste" >
-                        <br>
-                        <input type="submit" value="Submit" title="lets go!" class="btn btn-lg btn-success">
-                        </p>
-                    </form>
-                </p>
+            </form>
+            </p>
         </div>
-    <div class="row marketing">
-        {% for item in array%}
-        <div class="col-lg-6">
-          <h4><a href="/{{ item.id }}">{{ item.name }}</a></h4>
+        <div class="row marketing">
+            {% for item in array%}
+            <div class="col-lg-6">
+                <h4><a href="/{{ item.id }}">{{ item.name }} - <small>{{ item.language }}</small></a></h4>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-
-    {% include 'footer.twig' %}
-
+        {% include 'footer.twig' %}
     </div>
 </body>
 </html>
