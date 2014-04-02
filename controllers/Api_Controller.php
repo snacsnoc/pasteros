@@ -24,20 +24,17 @@ class Api_Controller extends Base_Controller {
         try {
 
             $data = json_decode(file_get_contents("php://input"), true);
-
+            
             //Set default values
             switch (false) {
                 case $data['name']:
-
                     $data['name'] = 'pasteros paste';
+                    continue;
 
-                    break;
                 case $data['content']:
-
                     $response = array(
                         'error' => 'No content sent'
                     );
-
                     break;
             }
 
@@ -63,7 +60,7 @@ class Api_Controller extends Base_Controller {
 
 
                 //Create a response
-                if ($insert_id) {
+                if (is_int($insert_id)) {
                     $response = array('id' => $insert_id);
                 } else {
                     $response = array(
@@ -72,11 +69,45 @@ class Api_Controller extends Base_Controller {
                 }
             }
 
+            
 
             return json_encode($response);
             header('Content-type: application/json');
         } catch (Exception $e) {
-            return json_last_error();
+            
+
+            echo json_encode($response);
+            //Code via http://docs.php.net/manual/en/function.json-last-error.php
+            // ;)
+            switch (json_last_error()) {
+            case JSON_ERROR_NONE:
+                return 'No errors, possibly missing content';
+            break;
+
+            case JSON_ERROR_DEPTH:
+                return 'Maximum stack depth exceeded';
+            break;
+
+            case JSON_ERROR_STATE_MISMATCH:
+                return 'Underflow or the modes mismatch';
+            break;
+
+            case JSON_ERROR_CTRL_CHAR:
+                return 'Unexpected control character found';
+            break;
+
+            case JSON_ERROR_SYNTAX:
+                return 'Syntax error, malformed JSON';
+            break;
+
+            case JSON_ERROR_UTF8:
+                return 'Malformed UTF-8 characters, possibly incorrectly encoded';
+            break;
+
+            default:
+                return 'Unknown error';
+            break;
+    }
         }
     }
 
