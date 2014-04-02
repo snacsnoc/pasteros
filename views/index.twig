@@ -1,16 +1,19 @@
 {% include 'head.twig' %}
 <body>
-    <div id="wrapper"><!-- #wrapper -->
+    <div class="container">
         {% include 'nav.twig' %}
-        {% include 'topheader.twig' %}
-        <section id="main"><!-- #main content and sidebar area -->
+        
+        <div class="jumbotron">
+            <h2>paste things</h2>
+                <p>
+                    <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
+                    
+                    <p class="text-info">name <input type="text" name="name" value="" maxlength="60"> (optional)</p>
+                </p>
 
-            <section id="homecontent"><!-- #content -->
-                <article>
-                    <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">name <input type="text" name="name" value="" size="30" maxlength="60"> (optional)<br >
                         <textarea name="content" rows="40" cols="400"></textarea>
                         <br>
-                        <select name="language">
+                        <select name="language" class="select input-sm">
                             <option value="bash">bash</option>
                             <option value="cpp">c++</option>
                             <option value="c#">c#</option>
@@ -26,27 +29,26 @@
                             <option value="sql">sql</option>
                             <option value="xml">xml</option>
                         </select>
+
                         <br>
-                        <input type="checkbox" name="visible" value="FALSE"><img src="/images/icon_padlock.gif"  title="check for private paste" ><br>
-                        <input type="submit" value="Submit" title="lets go!" class="button">
+                        <p>
+                        <input type="checkbox" name="visible" value="false"><img src="/images/icon_padlock.gif"  title="check for private paste" >
+                        <br>
+                        <input type="submit" value="Submit" title="lets go!" class="btn btn-lg btn-success">
+                        </p>
                     </form>
-                </article>
-            </section><!-- end of #content -->
-            <aside id="sidebar"><!-- sidebar -->
+                </p>
+        </div>
+    <div class="row marketing">
+        {% for item in array%}
+        <div class="col-lg-6">
+          <h4><a href="/{{ item.id }}">{{ item.name }}</a></h4>
+        </div>
+        {% endfor %}
+    </div>
 
-                <h3>Recent</h3>
-                <ul>
-                    {% for item in array%}
-                    <li>  {# {{ item.id }}: #} <a href="/{{ item.id }}">{{ item.name }}</a> </li>
-                    {% endfor %}
-                </ul>
+    {% include 'footer.twig' %}
 
-            </aside>
-
-        </section><!-- end of #main content and sidebar-->
-        {% include 'footer.twig' %}
-
-
-    </div><!-- #wrapper -->
+    </div>
 </body>
 </html>

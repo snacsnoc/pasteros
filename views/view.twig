@@ -1,38 +1,22 @@
 {% include 'head.twig' %}
 <body onload="prettyPrint()">
-    <div id="wrapper"><!-- #wrapper -->
+    <div class="container">
         {% include 'nav.twig' %}
-        {% include 'topheader.twig' %}
-        <section id="main">
-            <section id="content">
-                <p>
+        <div class="jdumbotron">
+            <p>
                 <h2>{{ name|escape }}</h2>
                 {% if parent_paste is not null %} 
                 <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ id }}/diff/{{ parent_paste }}">diff</a></h5> 
                 {% endif %}
+                <p>
                 Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ id }}/download">Download <img src="/images/icon_package_get.gif" title="download paste" alt="download"></a> | <a href="{{ id }}/raw">Raw <img src="/images/page.gif" alt="raw" title="see raw paste"></a> 
-                |  <img src="/images/file_font.gif" alt="change theme" title="change highlighting theme - current theme: {{ csstheme }}" onclick="javascript:$('.theme').toggle();">
-                <div class="theme" style="display: none;">
-                    <form action="/changetheme" method="post">
-                        <input type="hidden" name="id" value="{{ id }}">
-                        <select name="csstheme" onclick="this.form.submit();">
-                            <option value="RDark">RDark</option>
-                            <option value="Midnight">Midnight</option>
-                            <option value="MDUltra">MDUltra</option>
-                            <option value="FadeToGrey">FadeToGrey</option>
-                            <option value="Emacs">Emacs</option>
-                            <option value="Eclipse">Eclipse</option>
-                            <option value="Django">Django</option>
-                            <option value="Default">Default</option>
-                        </select>
-                    </form>
-                </div>| <a id="toggle">QR Code</a>
-                <img id="qrcode" src="/images/qrcode/{{ id }}.png" style="display:none;">         
-                </p>
-                <pre class="brush: {{ language }} toolbar: false;">{{ content|escape }}</pre>
-            </section>
+                | <a id="toggle">QR Code</a>
+                <img id="qrcode" src="/images/qrcode/{{ id }}.png" style="display:none;">  
+                </p>       
+            </p>
+                <pre class="brush: {{ language }}">{{ content|escape }}</pre>
             <br>
-            <section id="content">
+            <p>
                 <h3> Create a new version </h3>
                 <form name="paste" action="/add" method="post" enctype="multipart/form-data" id="paste">
                     <textarea name="content" rows="10%" cols="100%">{{ content|escape }}</textarea>
@@ -44,10 +28,10 @@
                     {% else %}
                     <input type="hidden" name="visible" value="true">
                     {% endif %}
-                    <input type="submit" value="fork this paste" title="just fork it!">
+                    <input type="submit" value="fork this paste" title="just fork it!" class="btn-sm btn-info">
                 </form>
-            </section>
-        </section>
+            </p>
+        </div>
         {% include 'footer.twig' %}
     </div><!-- #wrapper -->
 </body>

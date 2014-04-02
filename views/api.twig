@@ -1,13 +1,11 @@
+
 {% include 'head.twig' %}
 <body>
-    <div id="wrapper"><!-- #wrapper -->
+    <div class="container">
         {% include 'nav.twig' %}
-        {% include 'topheader.twig' %}
-        <section id="main"><!-- #main content and sidebar area -->
-            <section id="content"><!-- #content -->
-                <article>
 
-
+        <div class="jumbotron">
+            <h2>API</h2>
                     <p>
                         Send JSON encoded POST request to http://paste.gelat.in/api/v1/create <br>
                         Example:<br>
@@ -52,17 +50,9 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
                     The request returns the paste ID or an error message if something went wrong.
 
                     </p>
-                </article>
+        </div>
+{% include 'footer.twig' %}
 
-
-            </section><!-- end of #content -->
-
-
-        </section><!-- end of #main content and sidebar-->
-        {% include 'footer.twig' %}
-
-
-    </div><!-- #wrapper -->
-
+    </div>
 </body>
 </html>
