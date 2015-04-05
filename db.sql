@@ -8,7 +8,8 @@ id int NOT NULL UNIQUE PRIMARY KEY DEFAULT nextval('content_seq'),
 name  VARCHAR(60) NULL,
 content  TEXT NOT NULL,
 visible boolean DEFAULT TRUE,
-parent int, 
+parent VARCHAR(13), 
 language  VARCHAR(60) NULL,
-time TIMESTAMP DEFAULT now()
+time TIMESTAMP DEFAULT now(),
+uuid VARCHAR(13)
 );
