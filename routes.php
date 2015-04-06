@@ -79,7 +79,7 @@ $klein->respond('GET', '/[:id]/download', function ($request, $response, $servic
 $klein->respond('POST', '/changetheme', function ($request) {
             //Set cookie for 30 days
             setcookie('csstheme', $_POST['csstheme'], time() + 60 * 60 * 24 * 30);
-            $paste_id = intval($_POST['id']);
+            $paste_id = $_POST['id'];
             return header("Location: /$paste_id");
         });
 

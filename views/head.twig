@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="/css/diff.css">
     <link rel="stylesheet" href="/css/prettyprint.css">
     <link rel="stylesheet" href="/css/shCore.css"> 
-    <link rel="stylesheet" href="/css/shThemeDefault.css"> 
+    {% if csstheme is  null %}
+    {% set csstheme = 'Default' %}
+    {% endif %} 
+    <link type="text/css" rel="Stylesheet" href="/css/shTheme{{ csstheme }}.css"/> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
