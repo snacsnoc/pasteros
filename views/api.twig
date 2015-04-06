@@ -10,7 +10,7 @@
                         Send JSON encoded POST request to http://pasteros.io/api/v1/create <br>
                         Example:<br>
                     <pre class="brush: plain toolbar: false;">
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"test", "content":"my fun content", "language":"c++", "visible":true}' http://pasteros.io/api/v1/create
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"test", "content":"my fun content", "language":"c++", "visible":true}' https://pasteros.io/api/v1/create
                     </pre>
                     Example output:<br>
                     <pre class="brush: plain toolbar: false;">
@@ -22,7 +22,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -
                     With v1 simple create:
                     </p>
                     <pre class="brush: plain toolbar: false;">
-curl -silent -H "Expect:" --data-binary @test.txt http://pasteros.io/api/v1/simplecreate 
+curl -silent -H "Expect:" --data-binary @test.txt https://pasteros.io/api/v1/simplecreate 
                     </pre>
                     Paste ID output:<br>
                     <pre class="brush: plain toolbar: false;">
