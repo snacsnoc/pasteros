@@ -35,7 +35,7 @@ class Add_Controller {
         if ($_POST['parent_paste'] == null) {
             $parent_paste = null;
         } else {
-            $parent_paste = intval($_POST['parent_paste']);
+            $parent_paste = $_POST['parent_paste'];
         }
 
         //Insert paste into the database and get the row ID

@@ -38,7 +38,7 @@
         <div class="row marketing">
             {% for item in array%}
             <div class="col-lg-6">
-                <h4><a href="/{{ item.id }}">{{ item.name }} - <small>{{ item.language }}</small></a></h4>
+                <h4><a href="/{{ item.uuid }}">{{ item.name }} - <small>{{ item.language }}</small></a></h4>
             </div>
             {% endfor %}
         </div>

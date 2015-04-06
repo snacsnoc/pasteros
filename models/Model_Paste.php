@@ -25,7 +25,7 @@ class Model_Paste extends RedBean_SimpleModel {
      * @param int $paste_id Individual paste ID
      * @return array Paste's contents
      */
-    public static function getPaste($paste_id) {
+    public static function getPasteID($paste_id) {
 
         //Select the paste based on the ID given
         $paste_content = R::getAll("SELECT * 
@@ -41,9 +41,29 @@ class Model_Paste extends RedBean_SimpleModel {
     }
 
     /**
+     * Retrieve an individual paste given the UUID
+     * @param string $paste_id Individual paste UUID
+     * @return array Paste's contents
+     */
+    public static function getPaste($paste_uuid) {
+
+        //Select the paste based on the ID given
+        $paste_content = R::getAll("SELECT * 
+        FROM content 
+        WHERE content.uuid = '$paste_uuid' LIMIT 1");
+
+        //If the lookup failed, return false
+        if (null == $paste_content) {
+            return false;
+        } else {
+            return $paste_content[0];
+        }
+    }
+
+    /**
      * Select two pastes which one has been forked and the other is the parent
-     * @param int $paste_id Forked paste ID
-     * @param int $parent_id Parent paste ID
+     * @param string $paste_id Forked paste UUID
+     * @param string $parent_id Parent paste UUID
      * @return array Array of both paste's contents
      */
     public static function getDiffPaste($paste_id, $parent_id) {
@@ -51,12 +71,12 @@ class Model_Paste extends RedBean_SimpleModel {
         //Get the forked paste
         $fork_paste = R::getAll("SELECT content.content, content.name, content.id
         FROM content 
-        WHERE content.id = '$paste_id' AND  content.parent = '$parent_id'");
+        WHERE content.uuid = '$paste_id' AND  content.parent = '$parent_id'");
 
         //Get the parent paste 
         $parent_paste = R::getAll("SELECT content.content, content.id
         FROM content 
-        WHERE content.id = '$parent_id'");
+        WHERE content.uuid = '$parent_id'");
 
         //If there are no results in either query, return false
         if (null == $fork_paste || null == $parent_paste) {
@@ -70,9 +90,11 @@ class Model_Paste extends RedBean_SimpleModel {
      * Insert paste into database
      * @param array $content Input
      * @param string $database_name Database name
-     * @return mixed Returns the insert ID or false if an error occured
+     * @return mixed Returns the paste UUID or false if an error occured
      */
     public static function insertPaste($content = array(), $database_name) {
+        //Generate 13 character unique ID 
+        $unique_id = uniqid();
 
         $paste_insert = R::dispense($database_name);
         $paste_insert->name = $content['name'];
@@ -80,12 +102,12 @@ class Model_Paste extends RedBean_SimpleModel {
         $paste_insert->visible = $content['visible'];
         $paste_insert->parent = $content['parent_paste'];
         $paste_insert->language = $content['language'];
-
+        $paste_insert->uuid = $unique_id;
         $insert_id = R::store($paste_insert);
         R::close();
 
         if (true == $insert_id) {
-            return $insert_id;
+            return $unique_id;
         } else {
             return false;
         }

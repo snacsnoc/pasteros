@@ -19,8 +19,7 @@ $klein->respond('POST', '/add', function () {
         });
 
 //Viewing a paste
-$klein->respond('GET', '/[i:id]', function ($request, $response, $service) {
-            if ($service->validateParam('id')->isInt()) {
+$klein->respond('GET', '/[:id]', function ($request, $response, $service) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_index = $paste_view->get_index($paste_id);
@@ -30,15 +29,10 @@ $klein->respond('GET', '/[i:id]', function ($request, $response, $service) {
                     $_SESSION['error'] = serialize('invalid paste number!');
                     return header('Location: /');
                 }
-            } else {
-                $_SESSION['error'] = serialize('invalid paste number!');
-                return header('Location: /');
-            }
         });
 
 //Viewing a paste in a raw format
-$klein->respond('GET', '/[i:id]/raw', function ($request, $response, $service) {
-            if ($service->validateParam('id')->isInt()) {
+$klein->respond('GET', '/[:id]/raw', function ($request, $response, $service) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_raw = $paste_view->get_raw($paste_id);
@@ -49,17 +43,10 @@ $klein->respond('GET', '/[i:id]/raw', function ($request, $response, $service) {
                     $_SESSION['error'] = serialize('invalid paste number!');
                     return header('Location: /');
                 }
-            } else {
-                $_SESSION['error'] = serialize('invalid paste number!');
-                return header('Location: /');
-            }
         });
 
 //Diff a forked and parent paste
-$klein->respond('GET', '/[i:id]/diff/[i:parent]', function ($request, $response, $service) {
-            //Validate that the parent ID and forked ID are integers
-            if ($service->validateParam('id')->isInt() && $service->validateParam('parent')->isInt()) {
-
+$klein->respond('GET', '/[:id]/diff/[:parent]', function ($request, $response, $service) {
                 $paste_id = $request->id;
                 $parent_id = $request->parent;
 
@@ -70,23 +57,16 @@ $klein->respond('GET', '/[i:id]/diff/[i:parent]', function ($request, $response,
                 if (false !== $get_diff) {
                     echo $get_diff;
                 } else {
-                    $_SESSION['error'] = serialize('invalid paste number!');
+                    $_SESSION['error'] = serialize('invalid paste!');
                     return header('Location: /');
                 }
-            } else {
-                $_SESSION['error'] = serialize('invalid paste number!');
-                return header('Location: /');
-            }
         });
 
 
 
 //Force the user to download the paste
-$klein->respond('GET', '/[i:id]/download', function ($request, $response, $service) {
-
-            if ($service->validateParam('id')->isInt()) {
+$klein->respond('GET', '/[:id]/download', function ($request, $response, $service) {
                 $paste_id = $request->id;
-
                 $paste_view = new View_Controller();
                 $get_download = $paste_view->get_download($paste_id);
                 if (false !== $get_download) {
@@ -95,10 +75,6 @@ $klein->respond('GET', '/[i:id]/download', function ($request, $response, $servi
                     $_SESSION['error'] = serialize('invalid paste number!');
                     return header('Location: /');                    
                 }
-            } else {
-                $_SESSION['error'] = serialize('invalid paste number!');
-                return header('Location: /');
-            }
         }
 );
 

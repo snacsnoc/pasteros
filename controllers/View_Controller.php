@@ -26,6 +26,7 @@ class View_Controller extends Base_Controller {
 
             $paste_time = $paste_content['time'];
             $id = $paste_content['id'];
+            $paste_uuid = $paste_content['uuid'];
             $language = $paste_content['language'];
             
             //If forking a post
@@ -72,6 +73,7 @@ class View_Controller extends Base_Controller {
                         'name' => $name,
                         'content' => $content,
                         'id' => $id,
+                        'uuid' => $paste_uuid,
                         'time' => $paste_time,
                         'is_visible' => $is_visible,
                         'parent_paste' => $parent_paste,
@@ -109,7 +111,7 @@ class View_Controller extends Base_Controller {
         $paste_content = $get_paste->getPaste($paste_id);
 
 
-        $name = tempnam('temp/', $paste_content['name']);
+        $name = tempnam('/tmp', $paste_content['name']);
         $content = $paste_content['content'];
         
         //Create a 'temporary' file and force the user to download
