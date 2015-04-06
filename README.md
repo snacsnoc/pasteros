@@ -8,7 +8,7 @@ For web server rewrite rules, see https://gist.github.com/chriso/874000
 Create a bash alias and use pasteros in your .bashrc! 
 ```
 function uploadText {
-pasteid=$( curl -silent -H "Expect:" -X POST --data-binary @- http://pasteros.io/api/v1/simplecreate | tail -1)
+pasteid=$( curl -silent -H "Expect:" -X POST --data-binary @- https://pasteros.io/api/v1/simplecreate | tail -1)
 echo "https://pasteros.io/$pasteid"  | xclip -selection c
 }
 alias paste=uploadText
