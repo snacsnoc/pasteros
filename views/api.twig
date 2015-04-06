@@ -7,10 +7,10 @@
         <div class="jumbotron">
             <h2>API</h2>
                     <p>
-                        Send JSON encoded POST request to http://paste.gelat.in/api/v1/create <br>
+                        Send JSON encoded POST request to http://pasteros.io/api/v1/create <br>
                         Example:<br>
                     <pre class="brush: plain toolbar: false;">
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"test", "content":"my fun content", "language":"c++", "visible":true}' http://paste.gelat.in/api/v1/create
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"test", "content":"my fun content", "language":"c++", "visible":true}' http://pasteros.io/api/v1/create
                     </pre>
                     Example output:<br>
                     <pre class="brush: plain toolbar: false;">
@@ -22,7 +22,7 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -
                     With v1 simple create:
                     </p>
                     <pre class="brush: plain toolbar: false;">
-curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/simplecreate 
+curl -silent -H "Expect:" --data-binary @test.txt http://pasteros.io/api/v1/simplecreate 
                     </pre>
                     Paste ID output:<br>
                     <pre class="brush: plain toolbar: false;">
@@ -34,8 +34,8 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
                     .bashrc function and alias
                     <pre class="brush: bash toolbar: false;">
                     function uploadText {
-                    pasteid=$( curl -silent -H "Expect:" -X POST --data-binary @- http://paste.gelat.in/api/v1/simplecreate | tail -1)
-                    echo "http://paste.gelat.in/$pasteid"  | xclip -selection c
+                    pasteid=$( curl -silent -H "Expect:" -X POST --data-binary @- https://pasteros.io/api/v1/simplecreate | tail -1)
+                    echo "https://pasteros.io/$pasteid"  | xclip -selection c
                     }
                     alias paste=uploadText
                     </pre>
@@ -53,7 +53,7 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
 #!/usr/bin/env python
 # encoding: utf-8
 
-#Pasteros Paste at getlat.in
+#Pasteros Paste at pasteros.io
 
 # Copyright (C) 2015
 # 
@@ -73,7 +73,7 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
 import requests
 import sys
 
-site = "http://paste.gelat.in/"
+site = "https://pasteros.io/"
 api  = "api/v1/simplecreate"
 uri  = site + api
 text = sys.stdin.read()
