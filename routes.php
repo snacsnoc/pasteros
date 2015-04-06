@@ -25,9 +25,6 @@ $klein->respond('GET', '/[:id]', function ($request, $response, $service) {
                 $get_index = $paste_view->get_index($paste_id);
                 if (false !== $get_index) {
                     echo $get_index;
-                } else {
-                    $_SESSION['error'] = serialize('invalid paste number!');
-                    return header('Location: /');
                 }
         });
 
