@@ -16,7 +16,8 @@ curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -
                     <pre class="brush: plain toolbar: false;">
                     {"id":5521cfa79d49b}
                     </pre>
-
+                    <br>
+                    <br>
                     <p>
                     With v1 simple create:
                     </p>
@@ -27,6 +28,8 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
                     <pre class="brush: plain toolbar: false;">
                     552235abcfacd
                     </pre>
+                    <br>
+                    <br>
                     <p>
                     .bashrc function and alias
                     <pre class="brush: bash toolbar: false;">
@@ -41,7 +44,49 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
                     cat myfancyfile.py | paste
                     </pre>
                     The resulting paste URL will be copied to the clipboard.
-                    
+                    <br>
+                    <br>
+                    <p>
+                    Python
+                    </p>
+                    <pre>
+#!/usr/bin/env python
+# encoding: utf-8
+
+#Pasteros Paste at getlat.in
+
+# Copyright (C) 2015
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import requests
+import sys
+
+site = "http://paste.gelat.in/"
+api  = "api/v1/simplecreate"
+uri  = site + api
+text = sys.stdin.read()
+
+r = requests.post(uri, text)
+
+uri = site + r.text
+if r.status_code != 200:
+    sys.stdout.write("Http error code:\n")
+    sys.exit(r.status_code)
+else:
+    sys.stdout.write(uri + "\n")
+                    </pre>
                     <p>
                     Using the simple create API, only the content needs to be present. Visibility, paste name and syntax highlighting are set to default.
                     </p>
