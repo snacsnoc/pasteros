@@ -11,7 +11,7 @@
             <p>
                 Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ uuid }}/download">Download <img src="/images/icon_package_get.gif" title="download paste" alt="download"></a> | <a href="{{ uuid }}/raw">Raw <img src="/images/page.gif" alt="raw" title="see raw paste"></a> 
                 | <a id="toggle">QR Code</a>
-                <img id="qrcode" src="/images/qrcode/{{ uuid }}.png" style="display:none;">  
+                <img id="qrcode" src="/images/qrcode/{{ uuid }}.png" height="132" width="132" style="display:none;">  
             </p>
             </p>
             <pre class="brush: {{ language }}">{{ content|escape }}</pre>
