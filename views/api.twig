@@ -25,8 +25,23 @@ curl -silent -H "Expect:" --data-binary @test.txt http://paste.gelat.in/api/v1/s
                     </pre>
                     Paste ID output:<br>
                     <pre class="brush: plain toolbar: false;">
-                    300
+                    552235abcfacd
                     </pre>
+                    <p>
+                    .bashrc function and alias
+                    <pre class="brush: bash toolbar: false;">
+                    function uploadText {
+                    pasteid=$( curl -silent -H "Expect:" -X POST --data-binary @- http://paste.gelat.in/api/v1/simplecreate | tail -1)
+                    echo "http://paste.gelat.in/$pasteid"  | xclip -selection c
+                    }
+                    alias paste=uploadText
+                    </pre>
+                    Usage:
+                    <pre class="brush: bash toolbar: false;">
+                    cat myfancyfile.py | paste
+                    </pre>
+                    The resulting paste URL will be copied to the clipboard.
+                    
                     <p>
                     Using the simple create API, only the content needs to be present. Visibility, paste name and syntax highlighting are set to default.
                     </p>
