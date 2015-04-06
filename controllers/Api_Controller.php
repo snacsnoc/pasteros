@@ -51,7 +51,7 @@ class Api_Controller extends Base_Controller {
             //Check if there's content
             if (false !== $data['content']) {
 
-                //Insert paste into the database and get the row ID
+                //Insert paste into the database and get the paste UUID
                 $insert_id = Model_Paste::insertPaste(array('name' => $data['name'],
                             'content' => $data['content'],
                             'visible' => $data['visible'],
@@ -60,7 +60,7 @@ class Api_Controller extends Base_Controller {
 
 
                 //Create a response
-                if (is_int($insert_id)) {
+                if (true == $insert_id) {
                     $response = array('id' => $insert_id);
                 } else {
                     $response = array(
@@ -126,7 +126,7 @@ class Api_Controller extends Base_Controller {
             //Check if there's content
             if (false !== $data['content']) {
 
-                //Insert paste into the database and get the row ID
+                //Insert paste into the database and get the paste UUID
                 $insert_id = Model_Paste::insertPaste(array('name' => $data['name'],
                             'content' => $data['content'],
                             'visible' => $data['visible'],
@@ -135,7 +135,7 @@ class Api_Controller extends Base_Controller {
 
 
                 //Create a response
-                if ($insert_id) {
+                if (true == $insert_id) {
                     $response = $insert_id;
                 } else {
                     $response = 'No ID returned, something went wrong';
