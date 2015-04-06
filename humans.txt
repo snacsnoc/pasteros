@@ -5,7 +5,7 @@
 /* TEAM */
   Developer: Easton Elliott
   Site: geekness.eu
-  Twitter: @gr33n3gg
+  Twitter: @east
 
 
 /* THANKS */
