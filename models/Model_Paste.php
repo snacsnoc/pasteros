@@ -69,12 +69,12 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function getDiffPaste($paste_id, $parent_id) {
 
         //Get the forked paste
-        $fork_paste = R::getAll("SELECT content.content, content.name, content.id
+        $fork_paste = R::getAll("SELECT content.content, content.name, content.uuid
         FROM content 
         WHERE content.uuid = '$paste_id' AND  content.parent = '$parent_id'");
 
         //Get the parent paste 
-        $parent_paste = R::getAll("SELECT content.content, content.id
+        $parent_paste = R::getAll("SELECT content.content, content.uuid
         FROM content 
         WHERE content.uuid = '$parent_id'");
 

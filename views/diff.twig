@@ -1,23 +1,22 @@
+
 {% include 'head.twig' %}
-<body onload="prettyPrint()">
-    <div id="wrapper"><!-- #wrapper -->
+<body>
+    <div class="container">
         {% include 'nav.twig' %}
-        {% include 'topheader.twig' %}
-        <section id="main"><!-- #main content and sidebar area -->
-            <section id="content">
-                     <article>
-                         <section>
-                    <h2>{{ fork_paste.name }} diff</h2>
-                    diff of paste <b>{{ fork_paste.id }}</b> and <b>{{ parent_paste.id }}</b>
-                </section>
-                <section>
+        <div class="jumbotron">
+            <h2>{{ fork_paste.name }} diff</h2>
+                    <p>
+                        diff of paste <b>{{ fork_paste.uuid }}</b> and <b>{{ parent_paste.uuid }}</b>
+                    </p>
+                    <p>
+                    <section>
                     <a href="#" onclick="javascript:togglev();">Line # <img src="/images/page_tag_red.gif" alt="toggle" title="Show/Hide line numbers"></a> 
                     <pre class="prettyprint linenums"><code>{{ textdiff|raw }}</code></pre>
-                </section>
-            </article>
-            </section><!-- end of #content -->
-        </section><!-- end of #main content and sidebar-->
-        {% include 'footer.twig' %}
-    </div><!-- #wrapper -->
+                    </section>
+
+                    </p>
+        </div>
+{% include 'footer.twig' %}
+    </div>
 </body>
 </html>
