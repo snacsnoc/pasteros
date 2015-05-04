@@ -9,7 +9,7 @@
 .prettyprint, textarea
             {
                 border: solid 1px;
-                width:160%;
+                /* width:160%; */
                 margin:0;
 
             }
