@@ -9,12 +9,12 @@
                         diff of paste <b>{{ fork_paste.uuid }}</b> and <b>{{ parent_paste.uuid }}</b>
                     </p>
                     <p>
-                    <section>
-                    <a href="#" onclick="javascript:togglev();">Line # <img src="/images/page_tag_red.gif" alt="toggle" title="Show/Hide line numbers"></a> 
-                    <pre class="prettyprint linenums"><code>{{ textdiff|raw }}</code></pre>
-                    </section>
-
+                        <section>
+                        <a href="#" onclick="javascript:toggle_linenum();">Line # <img src="/images/page_tag_red.gif" alt="toggle" title="Show/Hide line numbers"></a> 
+                        <pre class="prettyprint linenums"><code>{{ textdiff|raw }}</code></pre>
+                        </section>
                     </p>
+
         </div>
 {% include 'footer.twig' %}
     </div>
