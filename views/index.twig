@@ -10,7 +10,7 @@
                 </p>
                 <textarea name="content" rows="40" cols="400"></textarea>
                 <br>
-                <select name="language" class="select input-sm">
+                <select name="language" class="select input-sm" title="choose a language for syntax highlighting">
                     <option value="bash">bash</option>
                     <option value="cpp">c++</option>
                     <option value="c#">c#</option>
@@ -29,7 +29,9 @@
                 <br>
                 <p>
                     <input type="checkbox" name="visible" value="false"><img src="/images/icon_padlock.gif"  title="check for private paste" >
-                    <br>
+                </p>   
+                <p class="text-info"> tag <input type="text" name="tag" value="" maxlength="30" title="tag your pastes so they can be grouped"> (optional) </p>
+                <p>
                     <input type="submit" value="Submit" title="lets go!" class="btn btn-lg btn-success">
                 </p>
             </form>

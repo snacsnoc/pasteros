@@ -103,6 +103,7 @@ class Model_Paste extends RedBean_SimpleModel {
         $paste_insert->parent = $content['parent_paste'];
         $paste_insert->language = $content['language'];
         $paste_insert->uuid = $unique_id;
+        $paste_insert->tag = $content['tag'];
         $insert_id = R::store($paste_insert);
         R::close();
 
@@ -112,5 +113,27 @@ class Model_Paste extends RedBean_SimpleModel {
             return false;
         }
     }
+
+    /**
+     * Retrieve pastes with a given tag
+     * @param string $tag_id Tag
+     * @return array All pastes with given tag
+     */
+    public static function getTags($tag_id) {
+
+        //Select the paste based on the ID given
+        $paste_tags = R::getAll("SELECT * 
+        FROM content 
+        WHERE content.tag = '$tag_id'");
+
+        //If the lookup failed, return false
+        if (null == $paste_tags) {
+            return false;
+        } else {
+            return $paste_tags;
+        }
+    }
+
+
 
 }

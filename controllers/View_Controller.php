@@ -28,7 +28,8 @@ class View_Controller extends Base_Controller {
             $id = $paste_content['id'];
             $paste_uuid = $paste_content['uuid'];
             $language = $paste_content['language'];
-            
+            $tag = $paste_content['tag'];
+
             //If forking a post
             if (isset($paste_content['parent'])) {
                 $parent_paste = $paste_content['parent'];
@@ -79,6 +80,7 @@ class View_Controller extends Base_Controller {
                         'parent_paste' => $parent_paste,
                         'diff' => $diff,
                         'language' => $language,
+                        'tag' => $tag,
                         'error' => unserialize($_SESSION['error']),
                         'csstheme' => $_COOKIE['csstheme']));
 

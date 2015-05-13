@@ -75,6 +75,19 @@ $klein->respond('GET', '/[:id]/download', function ($request, $response, $servic
         }
 );
 
+//View tagged pastes tagged with a uhm tag!
+$klein->respond('GET', '/tag/[:id]', function ($request, $response, $service) {
+                $tag_id = $request->id;
+                $tag_view = new Tag_Controller();
+                $get_index = $tag_view->get_index($tag_id);
+                if (false !== $get_index) {
+                    echo $get_index;
+                } else {
+                    $_SESSION['error'] = serialize('no such tag!');
+                    return header('Location: /');                    
+                }
+        });
+
 //Change the text highlighting colour
 $klein->respond('POST', '/changetheme', function ($request) {
             //Set cookie for 30 days

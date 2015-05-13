@@ -24,6 +24,13 @@ class Add_Controller {
         //Syntax highlighting
         $language = $_POST['language'];
 
+        //Set the paste tag to null if it is empty
+        if (!isset($_POST['tag']) || empty($_POST['tag'])){
+            $tag = null;
+        }else{
+            $tag = $_POST['tag'];
+        }
+        
         //If the checkbox is checked, then the paste is not visible in the recent box
         if ("false" == $_POST['visible']) {
             $visible = false;
@@ -43,7 +50,8 @@ class Add_Controller {
                     'content' => $content,
                     'visible' => $visible,
                     'parent_paste' => $parent_paste,
-                    'language' => $language), 'content');
+                    'language' => $language,
+                    'tag' => $tag), 'content');
 
         //If an ID is present, create a QR code redirect to the paste's page
         if ($insert_id) {

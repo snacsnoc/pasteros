@@ -1,0 +1,48 @@
+{% include 'head.twig' %}
+<body onload="prettyPrint()">
+    <div class="container">
+        {% include 'nav.twig' %}
+        <div class="jumbotron">
+            <p>
+            <h2>Pastes with tag {{ tag }}</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                URL
+                            </th>
+                            <th>
+                                Timestamp
+                            </th>  
+                            <th>
+                                Language
+                            </th>
+                            <th>
+                                Parent
+                            </th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for pastes in paste_tags %}
+                        <tr>
+                            <td>{{ pastes.name }}</td>
+                            <td><a href="/{{ pastes.uuid }}">View</a> </td>
+                            <td>{{ pastes.time }}</td>
+                            <td>{{ pastes.language }}</td>
+                            <td>{{ pastes.parent }}</td>
+                        </tr>    
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </p>
+        </div>         
+        {% include 'footer.twig' %}
+    </div>
+    <!-- #wrapper -->
+</body>
+</html>
