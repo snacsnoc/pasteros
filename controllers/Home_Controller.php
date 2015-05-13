@@ -14,7 +14,7 @@ class Home_Controller extends Base_Controller {
 
             //Get the 15 most recent pasts
             $get_pastes = R::dispense('paste');
-            $sidebar_result = $get_pastes->getRecentPastes(10);
+            $sidebar_result = $get_pastes->getRecentPastes(15);
 
             //We map it like so to correctly pass it to Twig
             $sidebar_array[] = $sidebar_result;
