@@ -17,7 +17,7 @@ class Tag_Controller extends Base_Controller {
             if (false === $paste_tags) {
                 return false;
             }
-            $this->title = $tag_id;
+            $this->title = $tag_id . " tag";
 
             //Pass the values to Twig and render the template
             return $this->twig->render('tag.twig', array('title' => $this->title,
