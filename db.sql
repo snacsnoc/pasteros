@@ -12,5 +12,6 @@ parent VARCHAR(13),
 language  VARCHAR(60) NULL,
 time TIMESTAMP DEFAULT now(),
 uuid VARCHAR(13),
-tag VARCHAR(40)
+tag VARCHAR(40),
+del_uuid VARCHAR(23)
 );
