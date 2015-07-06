@@ -5,6 +5,11 @@
         <div class="jdumbotron">
             <p>
             <h2>{{ name|escape }}</h2>
+
+            {% if delete_id is not null %} 
+            Your delete URL: <a href="/{{ uuid }}/delete/{{ delete_id }}">https://pasteros.io/{{ uuid }}/delete/{{ delete_id }}</a>
+            {% endif %}
+            
             {% if tag is not null %} 
             Tag: <a href="/tag/{{ tag }}">{{ tag }} </a>
             {% endif %}

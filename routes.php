@@ -26,6 +26,8 @@ $klein->respond('GET', '/[:id]', function ($request, $response, $service) {
                 if (false !== $get_index) {
                     echo $get_index;
                 }
+                //Set our session data for the delete ID to null after displaying it once
+                $_SESSION['delete_id'] = null;
         });
 
 //Viewing a paste in a raw format
@@ -88,6 +90,24 @@ $klein->respond('GET', '/tag/[:id]', function ($request, $response, $service) {
                 }
         });
 
+//Delete a paste
+$klein->respond('GET', '/[:id]/delete/[:del_id]', function ($request, $response, $service) {
+                $paste_id = $request->id;
+                $delete_id = $request->del_id;
+
+                $paste_delete = new Delete_Controller();
+                $get_delete = $paste_delete->get_index($paste_id, $delete_id);
+                if (false !== $get_delete) {
+                    return header('Location: /');      
+                } else {
+                    $_SESSION['error'] = serialize('invalid paste number!');
+                    return header('Location: /');                    
+                }
+        }
+);
+
+
+
 //Change the text highlighting colour
 $klein->respond('POST', '/changetheme', function ($request) {
             //Set cookie for 30 days
@@ -122,6 +142,11 @@ $klein->respond('GET', '/diff', function () {
             echo $get_index;
         });
 
+$klein->respond('GET', '/stats', function () {
+            $stats = new Stats_Controller();
+            $get_index = $stats->get_index();
+            echo $get_index;
+        });
 
 //If nothing matches, respond as a 404 error.
 $klein->respond('404', function () {

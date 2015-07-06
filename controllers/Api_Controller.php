@@ -61,7 +61,14 @@ class Api_Controller extends Base_Controller {
 
                 //Create a response
                 if (true == $insert_id) {
-                    $response = array('id' => $insert_id);
+
+                    //Get the unique delete ID
+                    $get_paste = R::dispense('paste');
+                    $paste_content = $get_paste->getPaste($insert_id);
+                    $delete_id = $paste_content['del_uuid'];
+
+
+                    $response = array('id' => $insert_id, 'delete_id' => $delete_id);
                 } else {
                     $response = array(
                         'error' => 'No ID returned, something went wrong'

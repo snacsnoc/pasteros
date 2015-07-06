@@ -93,8 +93,10 @@ class Model_Paste extends RedBean_SimpleModel {
      * @return mixed Returns the paste UUID or false if an error occured
      */
     public static function insertPaste($content = array(), $database_name) {
-        //Generate 13 character unique ID 
+        //Generate 13 character unique ID for the paste
         $unique_id = uniqid();
+        //Generate unique ID for paste deletion 
+        $delete_unique_id = bin2hex(openssl_random_pseudo_bytes(10));
 
         $paste_insert = R::dispense($database_name);
         $paste_insert->name = $content['name'];
@@ -104,6 +106,7 @@ class Model_Paste extends RedBean_SimpleModel {
         $paste_insert->language = $content['language'];
         $paste_insert->uuid = $unique_id;
         $paste_insert->tag = $content['tag'];
+        $paste_insert->del_uuid = $delete_unique_id;
         $insert_id = R::store($paste_insert);
         R::close();
 
@@ -134,6 +137,35 @@ class Model_Paste extends RedBean_SimpleModel {
         }
     }
 
+    /**
+     * Delete an individual paste given the UUID and delete UUID
+     * @param string $paste_uuid Individual paste UUID
+     * @param string $delete_uuid Individual paste UUID     
+     * @return boolean True or false depending on result
+     */
+    public static function deletePaste($paste_uuid, $delete_uuid) {
 
+        //Select the paste based on the ID given
+        $paste_delete = R::getAll("DELETE 
+        FROM content 
+        WHERE content.uuid = '$paste_uuid' AND content.del_uuid = '$delete_uuid'");
+
+        if (true === $paste_delete) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * Retrieve the amount (count) of pastes by language
+     * @return array Language and count of pastes with that language
+     */
+    public static function getCountByLanguage() {
+
+        return R::getAll('SELECT content.language, COUNT(content.language) FROM content GROUP BY content.language ORDER BY count DESC');
+        
+    }
 
 }
