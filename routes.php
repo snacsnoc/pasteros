@@ -130,6 +130,12 @@ $klein->respond('POST', '/api/v1/create', function () {
             echo $post_create;
         });
 
+$klein->respond('POST', '/api/v1/get', function () {
+            $api = new Api_Controller();
+            $post_get = $api->post_get();
+            echo $post_get;
+        });
+
 $klein->respond('POST', '/api/v1/simplecreate', function () {
             $api = new Api_Controller();
             $post_simplecreate = $api->post_simplecreate();
