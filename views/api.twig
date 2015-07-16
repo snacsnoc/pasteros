@@ -7,14 +7,75 @@
         <div class="jumbotron">
             <h2>API</h2>
                     <p>
-                        Send JSON encoded POST request to http://pasteros.io/api/v1/create <br>
-                        Example:<br>
+                    <h3>Create</h3>
+                    <h5>Send JSON encoded POST request to http://pasteros.io/api/v1/create</h5>
+                    Valid data format:
                     <pre class="brush: plain toolbar: false;">
-curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"test", "content":"my fun content", "language":"c++", "visible":true}' https://pasteros.io/api/v1/create
+                    {
+                    "name" : "PasteTitle", 
+                    "content" : "your fun fun fun content", 
+                    "language" : "python", 
+                    "visible" : false, 
+                    "tag" : "myProjectY"
+                    }
+                    </pre>
+                    <br>
+                    <b>visible</b> corresponds to whether or not the paste shows up in the most recent 15 pastes on the main page
+                    <br>
+                    <b>tag</b> tags a paste so pastes can be grouped together. <a href="https://pasteros.io/tag/test">example tag</a>
+                    <br>
+                    <br>
+                    <h4>Response</h4>
+                    <br>
+                    <pre class="brush: plain toolbar: false;">
+                    {
+                    "id" : "PASTE_ID",
+                    "delete_id" : "DELETE_ID"
+                    }
+                    </pre>
+                    <br>
+                    Pastes can be accessed at https://pasteros.io/<i>PASTE_ID</i>. Pastes can be deleted at https://pasteros.io/<i>PASTE_ID</i>/delete/<i>DELETE_ID</i>
+                    <br>
+                    <h3>Get</h3>
+                    <h5>Send JSON encoded POST request to http://pasteros.io/api/v1/get</h5>
+                    Valid data format:
+                    <pre class="brush: plain toolbar: false;">
+                    {
+                    "id" : "PASTE_ID"
+                    }
+                    </pre>
+                    <br>
+                    <h4>Response</h4>
+                    <pre class="brush: plain toolbar: false;">
+                    {
+                    "name" : "fancyPaste",
+                    "content" : "my fancy fancy content",
+                    "time" : "2014-04-20 04:55:16.822237",
+                    "language" : "bash",
+                    "visible" : true,
+                    "tag" : "myProjectY"
+                    }
+                    </pre>
+                    <br>
+                    <hr>
+                    <h4>Example</h4>
+                    <br>
+                    Creating a paste with curl:
+                    <pre class="brush: plain toolbar: false;">
+curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name":"mainFile.cpp", "content":"my fun content", "language":"c++", "visible":true, "tag":"myProject"}' https://pasteros.io/api/v1/create
                     </pre>
                     Example output:<br>
                     <pre class="brush: plain toolbar: false;">
-                    {"id":"559a02fca369b","delete_id":"29c72082a3daffac67eb"}
+                    {"id":"559a02fca369b","delete_id":"19c79082a3dcffac67eb"}
+                    </pre>
+                    <br>
+                    Retreiving a paste with curl:
+                    <pre class="brush: plain toolbar: false;">
+                    curl -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"id":"55a344b4bf2e3"}' https://pasteros.io/api/v1/get
+                    </pre>
+                    Example output:<br>
+                    <pre class="brush: plain toolbar: false;">
+                    {"name":null,"content":"CPPFLAGS=\"-I\/include -I\/usr\/include\" CFLAGS=-static LDFLAGS=\"-L\/usr\/lib -L\/lib -static\" \\\r\n.\/configure --prefix=\/usr --without-readline","time":"2015-07-13 04:55:16.822237","language":"plain","visible":true,"tag":"snacklinux"}
                     </pre>
                     <br>
                     <br>
@@ -29,7 +90,34 @@ curl -silent -H "Expect:" --data-binary @test.txt https://pasteros.io/api/v1/sim
                     552235abcfacd
                     </pre>
                     <br>
+                    <p>
+
+                    <h5>Using the simple create API, only the content needs to be present. Visibility, paste name and syntax highlighting are set to default.</h5>
+                    </p>
+                    Valid language values:
+                    <ul>
+                        <li>bash</li>
+                        <li>c++</li>
+                        <li>c#</li>
+                        <li>css</li>
+                        <li>diff</li>
+                        <li>java</li>
+                        <li>javascript</li>
+                        <li>perl</li>
+                        <li>php</li>
+                        <li>plain</li>
+                        <li>python</li>
+                        <li>ruby</li>
+                        <li>sql</li>
+                        <li>xml</li>
+                    </ul>
+                    The request returns the paste ID or an error message if something went wrong.
+
+                    </p>
                     <br>
+                    <br>
+                    <hr>
+                    <h3>Clients</h3>
                     <p>
                     .bashrc function and alias
                     <pre class="brush: bash toolbar: false;">
@@ -87,29 +175,7 @@ if r.status_code != 200:
 else:
     sys.stdout.write(uri + "\n")
                     </pre>
-                    <p>
-                    Using the simple create API, only the content needs to be present. Visibility, paste name and syntax highlighting are set to default.
-                    </p>
-                    Valid language values:
-                    <ul>
-                        <li>bash</li>
-                        <li>c++</li>
-                        <li>c#</li>
-                        <li>css</li>
-                        <li>diff</li>
-                        <li>java</li>
-                        <li>javascript</li>
-                        <li>perl</li>
-                        <li>php</li>
-                        <li>plain</li>
-                        <li>python</li>
-                        <li>ruby</li>
-                        <li>sql</li>
-                        <li>xml</li>
-                    </ul>
-                    The request returns the paste ID or an error message if something went wrong.
-
-                    </p>
+                    
         </div>
 {% include 'footer.twig' %}
 
