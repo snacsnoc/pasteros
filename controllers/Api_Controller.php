@@ -36,8 +36,19 @@ class Api_Controller extends Base_Controller {
                     break;
             }
 
+            $valid_languages = array('bash','c++', 'c#',
+             'css', 'diff', 'java', 'javascript', 
+             'perl', 'php', 'plain', 'python', 
+             'ruby', 'sql', 'xml'
+                );
+
             if (!isset($data['visible'])) {
                 $data['visible'] = false;
+            }
+
+            //Default to plain (no highlighting) if the language sent isn't in the list of valid languages
+            if(!in_array($data['language'], $valid_languages)){
+                $data['language'] = 'plain';
             }
 
             if (!isset($data['language'])) {
@@ -47,8 +58,9 @@ class Api_Controller extends Base_Controller {
             //Set the paste tag to null if it is empty
             if (!isset($data['tag'])){
                 $data['tag'] = null;
+            }else{
+                $data['tag'] = str_replace('/', '-', $data['tag']);
             }
-        
 
             //Check if there's content
             if (false !== $data['content']) {

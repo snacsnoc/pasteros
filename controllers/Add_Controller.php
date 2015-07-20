@@ -28,7 +28,7 @@ class Add_Controller {
         if (!isset($_POST['tag']) || empty($_POST['tag'])){
             $tag = null;
         }else{
-            $tag = $_POST['tag'];
+            $tag = str_replace('/', '-', $_POST['tag']);
         }
         
         //If the checkbox is checked, then the paste is not visible in the recent box
