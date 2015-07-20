@@ -64,7 +64,7 @@ class Api_Controller extends Base_Controller {
 
                 //Create a response
                 if (true == $insert_id) {
-
+                    \PHPQRCode\QRcode::png("https://pasteros.io/$insert_id", "/var/www/paste/public/images/qrcode/$insert_id.png", 'L', 4, 2);
                     //Get the unique delete ID
                     $get_paste = R::dispense('paste');
                     $paste_content = $get_paste->getPaste($insert_id);
