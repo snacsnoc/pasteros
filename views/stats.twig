@@ -1,0 +1,37 @@
+{% include 'head.twig' %}
+<body>
+    <div class="container">
+        {% include 'nav.twig' %}
+
+        <div class="jumbotron">
+            <h2>stats</h2>
+            <p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Language
+                            </th>
+                            <th>
+                                Count
+                            </th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {% for pastes in paste %}
+                        <tr>
+                            <td>{{ pastes.language }}</td>
+                            <td>{{ pastes.count }}</td>
+                        </tr>    
+                        {% endfor %}
+                    </tbody>
+                </table>                 
+			</p>
+        	</div>
+        </div>
+    {% include 'footer.twig' %}
+
+    </div>
+</body>
+</html>
