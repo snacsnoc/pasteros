@@ -39,7 +39,7 @@ $klein->respond('GET', '/[:id]/raw', function ($request, $response, $service) {
                 if (false !== $get_raw ) {
                     echo $get_raw;
                 } else {
-                    $_SESSION['error'] = serialize('invalid paste number!');
+                    $_SESSION['error'] = 'invalid paste number!';
                     return header('Location: /');
                 }
         });
@@ -56,7 +56,7 @@ $klein->respond('GET', '/[:id]/diff/[:parent]', function ($request, $response, $
                 if (false !== $get_diff) {
                     echo $get_diff;
                 } else {
-                    $_SESSION['error'] = serialize('invalid paste!');
+                    $_SESSION['error'] = 'invalid paste!';
                     return header('Location: /');
                 }
         });
@@ -71,7 +71,7 @@ $klein->respond('GET', '/[:id]/download', function ($request, $response, $servic
                 if (false !== $get_download) {
                     echo $get_download;
                 } else {
-                    $_SESSION['error'] = serialize('invalid paste number!');
+                    $_SESSION['error'] = 'invalid paste number!';
                     return header('Location: /');                    
                 }
         }
@@ -85,7 +85,7 @@ $klein->respond('GET', '/tag/[:id]', function ($request, $response, $service) {
                 if (false !== $get_index) {
                     echo $get_index;
                 } else {
-                    $_SESSION['error'] = serialize('no such tag!');
+                    $_SESSION['error'] = 'no such tag!';
                     return header('Location: /');                    
                 }
         });
@@ -100,7 +100,7 @@ $klein->respond('GET', '/[:id]/delete/[:del_id]', function ($request, $response,
                 if (false !== $get_delete) {
                     return header('Location: /');      
                 } else {
-                    $_SESSION['error'] = serialize('invalid paste number!');
+                    $_SESSION['error'] = 'invalid paste number!';
                     return header('Location: /');                    
                 }
         }

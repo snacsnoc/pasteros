@@ -81,11 +81,13 @@ class View_Controller extends Base_Controller {
                         'diff' => $diff,
                         'language' => $language,
                         'tag' => $tag,
-                        'error' => unserialize($_SESSION['error']),
+                        'error' => $_SESSION['error'],
+                        'delete_id' => $_SESSION['delete_id'],
                         'csstheme' => $_COOKIE['csstheme']));
 
             //Once the error has been passed to Twig, change it to null so it only appears once
             $_SESSION['error'] = null;
+
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
         }
@@ -148,7 +150,7 @@ class View_Controller extends Base_Controller {
         //Pass the values to Twig and render the template
         return $this->twig->render('diff.twig', array('title' => $this->title,
                     'fork_paste' => $fork_paste, 'parent_paste' => $parent_paste,
-                    'textdiff' => $textdiff, 'error' => unserialize($_SESSION['error'])));
+                    'textdiff' => $textdiff, 'error' => $_SESSION['error']));
         $_SESSION['error'] = null;
     }
 
