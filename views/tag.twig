@@ -27,7 +27,7 @@
                             </tr>
                     </thead>
                     <tbody>
-                        {% for pastes in paste_tags %}
+                        {% for pastes in paste_tags|reverse %}
                         <tr>
                             <td>{{ pastes.name }}</td>
                             <td><a href="/{{ pastes.uuid }}">View</a> </td>
