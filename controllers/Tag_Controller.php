@@ -23,7 +23,7 @@ class Tag_Controller extends Base_Controller {
             return $this->twig->render('tag.twig', array('title' => $this->title,
                         'paste_tags' => $paste_tags,
                         'tag' => $tag_id,
-                        'error' => unserialize($_SESSION['error'])
+                        'error' => $_SESSION['error']
                         ));
 
             //Once the error has been passed to Twig, change it to null so it only appears once
