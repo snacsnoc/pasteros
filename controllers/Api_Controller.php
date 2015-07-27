@@ -11,7 +11,7 @@ class Api_Controller extends Base_Controller {
 
             return $this->twig->render('api.twig', array(
                         'title' => $this->title,
-                        'error' => unserialize($_SESSION['error'])));
+                        'error' => $_SESSION['error']));
             $_SESSION['error'] = null;
         } catch (Exception $e) {
             die('ERROR: ' . $e->getMessage());
