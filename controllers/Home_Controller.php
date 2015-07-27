@@ -21,7 +21,7 @@ class Home_Controller extends Base_Controller {
 
             return $this->twig->render('index.twig', array(
                 'title' => $this->title, 'array' => $sidebar_array[0],
-                'error' => unserialize($_SESSION['error'])));
+                'error' => $_SESSION['error']));
             $_SESSION['error'] = null;
         } catch (Exception $e) {
             die('ERROR: ' . $e->getMessage());
