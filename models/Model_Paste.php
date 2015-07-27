@@ -168,4 +168,16 @@ class Model_Paste extends RedBean_SimpleModel {
         
     }
 
+    /**
+     * Retrieve the amount (count) of tags
+     * @return int Number of unique tags
+     */
+    public static function getCountByTag() {
+
+        return R::getAll('SELECT COUNT(DISTINCT content.tag) FROM content LIMIT 1');
+        
+    }
+
+
+
 }
