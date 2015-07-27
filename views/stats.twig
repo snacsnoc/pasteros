@@ -26,8 +26,11 @@
                         </tr>    
                         {% endfor %}
                     </tbody>
-                </table>                 
+                </table>       
 			</p>
+            <p>
+            Number of unique tags: {{ tag_count.0.count }}          
+            </p>
         	</div>
         </div>
     {% include 'footer.twig' %}
