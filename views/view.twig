@@ -18,7 +18,7 @@
             <h5>forked from paste <a href="/{{ parent_paste }}">{{ parent_paste }}</a> | <a href="/{{ uuid }}/diff/{{ parent_paste }}">diff</a></h5>
             {% endif %}
             <p>
-                Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ uuid }}/download">Download <img src="/images/icon_package_get.gif" height="16" width="16" title="download paste" alt="download"></a> | <a href="{{ uuid }}/raw">Raw <img src="/images/page.gif" height="16" width="16" alt="raw" title="see raw paste"></a> 
+                Date: {{ time|date }} ( {{ diff.time }} {{ diff.unit }} ago ) | <a href="{{ uuid }}/download">Download <img src="/images/icon_package_get.gif" height="16" width="16" title="download paste" alt="download"></a> | <a href="{{ uuid }}/raw">Raw <img src="/images/page.gif" height="16" width="16" alt="raw" title="see raw paste"></a> | <a href="{{ uuid }}/md">Markdown <img src="/images/table.gif" height="16" width="16" alt="raw" title="see raw paste"></a> 
                 | <a id="toggle">QR Code</a>
                 <img id="qrcode" src="/images/qrcode/{{ uuid }}.png" height="132" width="132" style="display:none;">  
             </p>

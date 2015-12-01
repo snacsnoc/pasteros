@@ -23,8 +23,14 @@ $klein->respond('GET', '/[:id]', function ($request, $response, $service) {
                 $paste_id = $request->id;
                 $paste_view = new View_Controller();
                 $get_index = $paste_view->get_index($paste_id);
-                if (false !== $get_index) {
-                    echo $get_index;
+                
+                if(strlen($paste_id) == 13){
+                    if (false !== $get_index) {
+                        echo $get_index;
+                    } else {
+                        $_SESSION['error'] = 'invalid paste number!';
+                        return header('Location: /');
+                    }
                 }
                 //Set our session data for the delete ID to null after displaying it once
                 $_SESSION['delete_id'] = null;
@@ -80,6 +86,7 @@ $klein->respond('GET', '/[:id]/download', function ($request, $response, $servic
 //View tagged pastes tagged with a uhm tag!
 $klein->respond('GET', '/tag/[:id]', function ($request, $response, $service) {
                 $tag_id = $request->id;
+                
                 $tag_view = new Tag_Controller();
                 $get_index = $tag_view->get_index($tag_id);
                 if (false !== $get_index) {
@@ -106,7 +113,19 @@ $klein->respond('GET', '/[:id]/delete/[:del_id]', function ($request, $response,
         }
 );
 
+//Viewing a paste in with markdown
+$klein->respond('GET', '/[:id]/md', function ($request, $response, $service) {
+                $paste_id = $request->id;
+                $paste_view = new View_Controller();
+                $get_markdown = $paste_view->get_markdown($paste_id);
 
+                if (false !== $get_markdown ) {
+                    echo $get_markdown;
+                } else {
+                    $_SESSION['error'] = 'invalid paste number!';
+                    return header('Location: /');
+                }
+        });
 
 //Change the text highlighting colour
 $klein->respond('POST', '/changetheme', function ($request) {

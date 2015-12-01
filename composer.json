@@ -2,7 +2,8 @@
     "require": {
         "klein/klein": "v2.0.2",
         "twig/twig": "1.*",
-        "aferrandini/phpqrcode": "1.0.1"        
+        "aferrandini/phpqrcode": "1.0.1",
+        "michelf/php-markdown": "1.5"        
        
     }
 }

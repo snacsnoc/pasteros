@@ -108,6 +108,17 @@ class View_Controller extends Base_Controller {
         return $content;
     }
 
+    public function get_markdown($paste_id) {
+
+        //Select the paste based on the ID given
+        $get_paste = R::dispense('paste');
+        $paste_content = $get_paste->getPaste($paste_id);
+
+        $content = \Michelf\Markdown::defaultTransform($paste_content['content']);
+
+        return $content;
+    }
+
     public function get_download($paste_id) {
 
         //Select the paste based on the ID given
