@@ -137,6 +137,30 @@ curl -silent -H "Expect:" --data-binary @test.txt https://pasteros.io/api/v1/sim
                     <p>
                     <a href="https://pasteros.io/files/pastes.py">Python client</a>
                     </p>
+                    Usage:
+                    <pre>
+usage: pastes.py [-h] [-n NAME] [-t TAG]
+                 [-l {bash,c++,c#,css,diff,java,javascript,perl,php,plain,python,ruby,sql,xml}]
+                 file [file ...]
+
+positional arguments:
+  file                  Put either a file, or rawtext
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NAME, --name NAME  Name of the paste
+  -t TAG, --tag TAG     Tag description of paste
+  -l --language {bash,c++,c#,css,diff,java,javascript,perl,php,plain,python,ruby,sql,xml}    Programming language
+
+
+                    </pre>
+                    Example:
+                    <pre>
+pastes.py -l php -n "Pasteros API controller" controllers/Api_Controller.php
+
+pastes.py --language c++ --tag myCurrentCPlusPlusProject "#include <iostream> int main(){std::cout << 1 << std::endl;}"
+                    </pre>
+                    The client will return the link to the pastes as well as the delete URL
                     
         </div>
 {% include 'footer.twig' %}
