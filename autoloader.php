@@ -12,21 +12,5 @@ function classLoader($class_name) {
     }
 }
 
-//Autoload the required libraries
-function libraryLoader() {
-    $libraries = array(
-        'libraries/rb.php',
-        'libraries/finediff.php');
-
-    $library_path = '';
-    foreach ($libraries as $value) {
-        $library_path = APP_PATH . '/' . $value;
-        if (file_exists($library_path)) {
-            require_once $library_path;
-        }
-    }
-}
-
 //Register it
 spl_autoload_register('classLoader');
-spl_autoload_register('libraryLoader');

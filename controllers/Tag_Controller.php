@@ -10,7 +10,7 @@ class Tag_Controller extends Base_Controller {
     public function get_index($tag_id) {
         try {
 
-            $get_tag = R::dispense('paste');
+            $get_tag = \RedBeanPHP\R::dispense('paste');
             $paste_tags = $get_tag->getTags($tag_id);
 
             //If no result is returned, return false 

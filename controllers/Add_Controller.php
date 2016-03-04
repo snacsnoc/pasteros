@@ -58,7 +58,7 @@ class Add_Controller {
             \PHPQRCode\QRcode::png("https://pasteros.io/$insert_id", "/var/www/paste/public/images/qrcode/$insert_id.png", 'L', 4, 2);
 
             //Get that delete UUID we just made, and set a session variable to the unique ID
-            $get_paste = R::dispense('paste');
+            $get_paste = \RedBeanPHP\R::dispense('paste');
             $paste_content = $get_paste->getPaste($insert_id);
             $_SESSION['delete_id'] = $paste_content['del_uuid'];
 

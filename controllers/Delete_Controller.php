@@ -10,7 +10,7 @@ class Delete_Controller extends Base_Controller {
 public function get_index($paste_id, $delete_id) {
 
 
-            $get_paste = R::dispense('paste');
+            $get_paste = \RedBeanPHP\R::dispense('paste');
             $paste_content = $get_paste->getPaste($paste_id);
 
             //If no result is returned, return false 
@@ -24,7 +24,7 @@ public function get_index($paste_id, $delete_id) {
             if($delete_uuid === $delete_id){
 
 
-            	$get_paste = R::dispense('paste');
+            	$get_paste = \RedBeanPHP\R::dispense('paste');
         		$paste_content = $get_paste->deletePaste($paste_id, $delete_id);
         		if(true == $paste_content){
         			return true;

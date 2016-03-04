@@ -3,7 +3,9 @@
         "klein/klein": "v2.0.2",
         "twig/twig": "1.*",
         "aferrandini/phpqrcode": "1.0.1",
-        "michelf/php-markdown": "1.5"        
+        "michelf/php-markdown": "1.5",
+        "gabordemooij/redbean": "4.3",
+        "cogpowered/finediff": "0.3.*"        
        
     }
 }

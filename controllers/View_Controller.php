@@ -10,7 +10,7 @@ class View_Controller extends Base_Controller {
     public function get_index($paste_id) {
         try {
 
-            $get_paste = R::dispense('paste');
+            $get_paste = \RedBeanPHP\R::dispense('paste');
             $paste_content = $get_paste->getPaste($paste_id);
 
             //If no result is returned, return false 
@@ -96,7 +96,7 @@ class View_Controller extends Base_Controller {
     public function get_raw($paste_id) {
 
         //Select the paste based on the ID given
-        $get_paste = R::dispense('paste');
+        $get_paste = \RedBeanPHP\R::dispense('paste');
         $paste_content = $get_paste->getPaste($paste_id);
 
         $content = $paste_content['content'];
@@ -111,7 +111,7 @@ class View_Controller extends Base_Controller {
     public function get_markdown($paste_id) {
 
         //Select the paste based on the ID given
-        $get_paste = R::dispense('paste');
+        $get_paste = \RedBeanPHP\R::dispense('paste');
         $paste_content = $get_paste->getPaste($paste_id);
 
         $content = \Michelf\Markdown::defaultTransform($paste_content['content']);
@@ -122,7 +122,7 @@ class View_Controller extends Base_Controller {
     public function get_download($paste_id) {
 
         //Select the paste based on the ID given
-        $get_paste = R::dispense('paste');
+        $get_paste = \RedBeanPHP\R::dispense('paste');
         $paste_content = $get_paste->getPaste($paste_id);
 
 
@@ -142,7 +142,7 @@ class View_Controller extends Base_Controller {
     public function get_diff($paste_id, $parent_id) {
 
         //Get the two pastes
-        $get_paste = R::dispense('paste');
+        $get_paste = \RedBeanPHP\R::dispense('paste');
         $diff_content = $get_paste->getDiffPaste($paste_id, $parent_id);
 
         $fork_paste = $diff_content[0];
@@ -154,9 +154,12 @@ class View_Controller extends Base_Controller {
 
 
         //Get opcode(?) for diff
-        $opcodes = FineDiff::getDiffOpcodes($parent_paste['content'], $fork_paste['content'] /* , default granularity is set to character */);
+        #$opcodes = FineDiff::getDiffOpcodes($parent_paste['content'], $fork_paste['content'] /* , default granularity is set to character */);
         //Render the opcode to an HTML diff
-        $textdiff = FineDiff::renderDiffToHTMLFromOpcodes($parent_paste['content'], $opcodes);
+        #$textdiff = FineDiff::renderDiffToHTMLFromOpcodes($parent_paste['content'], $opcodes);
+
+        $diff = new cogpowered\FineDiff\Diff;
+        $textdiff = $diff->render($parent_paste['content'], $fork_paste['content']);
 
         //Pass the values to Twig and render the template
         return $this->twig->render('diff.twig', array('title' => $this->title,

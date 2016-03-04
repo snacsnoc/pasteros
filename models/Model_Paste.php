@@ -1,6 +1,6 @@
 <?php
 
-class Model_Paste extends RedBean_SimpleModel {
+class Model_Paste extends RedBeanPHP\SimpleModel {
 
     /**
      * @return awesome Awesome output 
@@ -16,7 +16,7 @@ class Model_Paste extends RedBean_SimpleModel {
      */
     public static function getRecentPastes($paste_limit) {
 
-        $sidebar_result = R::getAll("SELECT * FROM content WHERE visible = TRUE ORDER BY id DESC LIMIT $paste_limit OFFSET 0");
+        $sidebar_result = \RedBeanPHP\R::getAll("SELECT * FROM content WHERE visible = TRUE ORDER BY id DESC LIMIT $paste_limit OFFSET 0");
         return $sidebar_result;
     }
 
@@ -28,7 +28,7 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function getPasteID($paste_id) {
 
         //Select the paste based on the ID given
-        $paste_content = R::getAll("SELECT * 
+        $paste_content = \RedBeanPHP\R::getAll("SELECT * 
         FROM content 
         WHERE content.id = '$paste_id' LIMIT 1");
 
@@ -48,7 +48,7 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function getPaste($paste_uuid) {
 
         //Select the paste based on the ID given
-        $paste_content = R::getAll("SELECT * 
+        $paste_content = \RedBeanPHP\R::getAll("SELECT * 
         FROM content 
         WHERE content.uuid = '$paste_uuid' LIMIT 1");
 
@@ -69,12 +69,12 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function getDiffPaste($paste_id, $parent_id) {
 
         //Get the forked paste
-        $fork_paste = R::getAll("SELECT content.content, content.name, content.uuid
+        $fork_paste = \RedBeanPHP\R::getAll("SELECT content.content, content.name, content.uuid
         FROM content 
         WHERE content.uuid = '$paste_id' AND  content.parent = '$parent_id'");
 
         //Get the parent paste 
-        $parent_paste = R::getAll("SELECT content.content, content.uuid
+        $parent_paste = \RedBeanPHP\R::getAll("SELECT content.content, content.uuid
         FROM content 
         WHERE content.uuid = '$parent_id'");
 
@@ -98,7 +98,7 @@ class Model_Paste extends RedBean_SimpleModel {
         //Generate unique ID for paste deletion 
         $delete_unique_id = bin2hex(openssl_random_pseudo_bytes(10));
 
-        $paste_insert = R::dispense($database_name);
+        $paste_insert = \RedBeanPHP\R::dispense($database_name);
         $paste_insert->name = $content['name'];
         $paste_insert->content = $content['content'];
         $paste_insert->visible = $content['visible'];
@@ -107,8 +107,8 @@ class Model_Paste extends RedBean_SimpleModel {
         $paste_insert->uuid = $unique_id;
         $paste_insert->tag = $content['tag'];
         $paste_insert->del_uuid = $delete_unique_id;
-        $insert_id = R::store($paste_insert);
-        R::close();
+        $insert_id = \RedBeanPHP\R::store($paste_insert);
+        \RedBeanPHP\R::close();
 
         if (true == $insert_id) {
             return $unique_id;
@@ -125,7 +125,7 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function getTags($tag_id) {
 
         //Select the paste based on the ID given
-        $paste_tags = R::getAll("SELECT * 
+        $paste_tags = \RedBeanPHP\R::getAll("SELECT * 
         FROM content 
         WHERE content.tag = '$tag_id'");
 
@@ -146,7 +146,7 @@ class Model_Paste extends RedBean_SimpleModel {
     public static function deletePaste($paste_uuid, $delete_uuid) {
 
         //Select the paste based on the ID given
-        $paste_delete = R::getAll("DELETE 
+        $paste_delete = \RedBeanPHP\R::getAll("DELETE 
         FROM content 
         WHERE content.uuid = '$paste_uuid' AND content.del_uuid = '$delete_uuid'");
 
@@ -164,7 +164,7 @@ class Model_Paste extends RedBean_SimpleModel {
      */
     public static function getCountByLanguage() {
 
-        return R::getAll('SELECT content.language, COUNT(content.language) FROM content GROUP BY content.language ORDER BY count DESC');
+        return \RedBeanPHP\R::getAll('SELECT content.language, COUNT(content.language) FROM content GROUP BY content.language ORDER BY count DESC');
         
     }
 
@@ -174,7 +174,7 @@ class Model_Paste extends RedBean_SimpleModel {
      */
     public static function getCountByTag() {
 
-        return R::getAll('SELECT COUNT(DISTINCT content.tag) FROM content LIMIT 1');
+        return \RedBeanPHP\R::getAll('SELECT COUNT(DISTINCT content.tag) FROM content LIMIT 1');
         
     }
 

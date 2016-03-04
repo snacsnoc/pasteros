@@ -13,7 +13,7 @@ class Home_Controller extends Base_Controller {
             $this->title = 'home';
 
             //Get the 15 most recent pasts
-            $get_pastes = R::dispense('paste');
+            $get_pastes = \RedBeanPHP\R::dispense('paste');
             $sidebar_result = $get_pastes->getRecentPastes(15);
 
             //We map it like so to correctly pass it to Twig

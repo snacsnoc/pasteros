@@ -10,7 +10,7 @@ class Stats_Controller extends Base_Controller {
     public function get_index() {
         try {
 
-            $count_paste = R::dispense('paste');
+            $count_paste = \RedBeanPHP\R::dispense('paste');
             $paste_count = $count_paste->getCountByLanguage();
             $tag_count = $count_paste->getCountByTag();
             

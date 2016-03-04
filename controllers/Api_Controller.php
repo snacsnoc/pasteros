@@ -78,7 +78,7 @@ class Api_Controller extends Base_Controller {
                 if (true == $insert_id) {
                     \PHPQRCode\QRcode::png("https://pasteros.io/$insert_id", "/var/www/paste/public/images/qrcode/$insert_id.png", 'L', 4, 2);
                     //Get the unique delete ID
-                    $get_paste = R::dispense('paste');
+                    $get_paste = \RedBeanPHP\R::dispense('paste');
                     $paste_content = $get_paste->getPaste($insert_id);
                     $delete_id = $paste_content['del_uuid'];
 
@@ -149,7 +149,7 @@ class Api_Controller extends Base_Controller {
 
 
 
-            $get_paste = R::dispense('paste');
+            $get_paste = \RedBeanPHP\R::dispense('paste');
             $paste_content = $get_paste->getPaste($data['id']);
 
             //If no result is returned, return false 
