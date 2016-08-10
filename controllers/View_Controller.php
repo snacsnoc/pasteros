@@ -107,7 +107,20 @@ class View_Controller extends Base_Controller {
         header("Content-Description: File Transfer");
         return $content;
     }
+    public function get_image($paste_id, $type=jpeg) {
 
+        //Select the paste based on the ID given
+        $get_paste = \RedBeanPHP\R::dispense('paste');
+        $paste_content = $get_paste->getPaste($paste_id);
+
+        $content = base64_decode($paste_content['content']);
+
+        //Allow the user to view the raw content
+        header("Content-type: image/$type");
+        header("Content-Transfer-Encoding: binary");
+        header("Content-Length: " .(string)(filesize($content)) );
+        return $content;
+    }
     public function get_markdown($paste_id) {
 
         //Select the paste based on the ID given
