@@ -1,11 +1,18 @@
 {
     "require": {
-        "klein/klein": "v2.0.2",
+        "klein/klein": "v2.0.*",
         "twig/twig": "1.*",
         "aferrandini/phpqrcode": "1.0.1",
-        "michelf/php-markdown": "1.5",
-        "gabordemooij/redbean": "4.3",
-        "cogpowered/finediff": "0.3.*"        
+        "michelf/php-markdown": "^2.0",
+        "gabordemooij/redbean": "4.*",
+        "endroid/qr-code": "3.*",
+        "cogpowered/finediff": "0.3.*",
+        "lolli42/finediff": "^1.0"        
        
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }
