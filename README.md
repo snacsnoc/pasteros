@@ -16,3 +16,5 @@ alias paste=uploadText
 
 
 `cat myfile.txt | paste`
+
+Create a `cache` directory in the main folder
